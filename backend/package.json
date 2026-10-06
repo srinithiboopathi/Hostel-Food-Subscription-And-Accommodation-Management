@@ -1,0 +1,32 @@
+{
+  "name": "hostel-management-backend",
+  "version": "1.0.0",
+  "description": "Production REST API Backend for Hostel Food & Accommodation Management System",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "db:init": "node src/scripts/initDb.js"
+  },
+  "keywords": [
+    "hostel",
+    "dbms",
+    "mysql",
+    "express",
+    "jwt",
+    "react"
+  ],
+  "author": "Senior Full-Stack Engineer",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "express-validator": "^7.3.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.11.3"
+  }
+}
