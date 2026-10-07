@@ -396,17 +396,17 @@ export default function AllocationsPage() {
       <AccommodationNav />
 
       {/* Header Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900/60 p-6 rounded-2xl border border-slate-800/80 backdrop-blur-xl shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-card">
         <div>
           <div className="flex items-center gap-3">
-            <span className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+            <span className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
               <KeyRound className="w-6 h-6" />
             </span>
             <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+              <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
                 Room Allocations & Assignments
               </h1>
-              <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
+              <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
                 Manage student-room assignments, transfer workflows, clearance checkouts, and complete allocation logs.
               </p>
             </div>
@@ -417,17 +417,17 @@ export default function AllocationsPage() {
           <button
             onClick={() => fetchAllocationsList(pagination.page)}
             disabled={loading}
-            className="px-3.5 py-2 text-xs font-semibold rounded-xl border border-slate-800 bg-slate-900 text-slate-300 hover:bg-slate-800 hover:text-white flex items-center gap-1.5 transition-all shadow-xs"
+            className="px-3.5 py-2 text-xs font-semibold rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 flex items-center gap-1.5 transition-all shadow-xs"
             title="Refresh allocations"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-indigo-400' : ''}`} />
+            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-emerald-600' : ''}`} />
             <span>Refresh</span>
           </button>
 
           {canManage && (
             <button
               onClick={handleOpenAllocateModal}
-              className="px-4 py-2 text-xs font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white flex items-center gap-1.5 transition-all shadow-md shadow-indigo-600/30"
+              className="px-4 py-2 text-xs font-semibold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white flex items-center gap-1.5 transition-all shadow-md shadow-emerald-600/20"
             >
               <Plus className="w-4 h-4" />
               <span>+ Allocate Student</span>
@@ -438,15 +438,15 @@ export default function AllocationsPage() {
 
       {/* Global Alerts */}
       {actionSuccess && (
-        <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium flex items-center gap-2">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+        <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-medium flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
           <span>{actionSuccess}</span>
         </div>
       )}
 
       {error && (
-        <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs font-medium flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
+        <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-medium flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
           <span>{error}</span>
         </div>
       )}
@@ -455,17 +455,17 @@ export default function AllocationsPage() {
       <AccommodationStats stats={accommodationStats} loading={loading} />
 
       {/* Search and Filters Bar */}
-      <div className="bg-slate-900/60 p-4 rounded-2xl border border-slate-800/80 backdrop-blur-md space-y-3">
+      <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-card space-y-3">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
           {/* Search Input */}
           <div className="sm:col-span-2 relative">
-            <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search student, roll number, room..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-950/70 border border-slate-800 text-white placeholder-slate-500 focus:outline-hidden focus:border-indigo-500"
+              className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-emerald-500 focus:bg-white"
             />
           </div>
 
@@ -474,7 +474,7 @@ export default function AllocationsPage() {
             <select
               value={hostelFilter}
               onChange={(e) => setHostelFilter(e.target.value)}
-              className="w-full px-3 py-2 text-xs rounded-xl bg-slate-950/70 border border-slate-800 text-slate-200 focus:outline-hidden focus:border-indigo-500"
+              className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-700 focus:outline-hidden focus:border-emerald-500 focus:bg-white"
             >
               <option value="">All Hostels</option>
               {hostelsList.map((h) => (
@@ -490,7 +490,7 @@ export default function AllocationsPage() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full px-3 py-2 text-xs rounded-xl bg-slate-950/70 border border-slate-800 text-slate-200 focus:outline-hidden focus:border-indigo-500"
+              className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-700 focus:outline-hidden focus:border-emerald-500 focus:bg-white"
             >
               <option value="ACTIVE">Active Allocations Only</option>
               <option value="TRANSFERRED">Transferred History</option>
@@ -505,7 +505,7 @@ export default function AllocationsPage() {
             <select
               value={academicYearFilter}
               onChange={(e) => setAcademicYearFilter(e.target.value)}
-              className="w-full px-3 py-2 text-xs rounded-xl bg-slate-950/70 border border-slate-800 text-slate-200 focus:outline-hidden focus:border-indigo-500"
+              className="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-700 focus:outline-hidden focus:border-emerald-500 focus:bg-white"
             >
               <option value="">All Academic Years</option>
               <option value="2025-2026">2025-2026</option>
@@ -524,7 +524,7 @@ export default function AllocationsPage() {
                 setStatusFilter('ACTIVE');
                 setAcademicYearFilter('');
               }}
-              className="px-3 py-1 text-xs text-rose-400 hover:bg-rose-500/10 rounded-xl transition-colors font-medium border border-rose-500/20"
+              className="px-3 py-1 text-xs text-rose-600 hover:bg-rose-50 rounded-xl transition-colors font-medium border border-rose-200"
             >
               Reset Filters
             </button>
@@ -533,23 +533,23 @@ export default function AllocationsPage() {
       </div>
 
       {/* Allocations Table */}
-      <div className="bg-slate-900/60 border border-slate-800/80 rounded-2xl overflow-hidden backdrop-blur-md shadow-xs">
+      <div className="bg-white border border-slate-200/80 rounded-2xl overflow-hidden shadow-card">
         {loading ? (
           <div className="py-20 flex flex-col items-center justify-center">
-            <Loader2 className="w-8 h-8 text-indigo-400 animate-spin mb-3" />
-            <p className="text-xs text-slate-400 font-medium">Fetching allocation records from MySQL...</p>
+            <Loader2 className="w-8 h-8 text-emerald-600 animate-spin mb-3" />
+            <p className="text-xs text-slate-500 font-medium">Fetching allocation records from MySQL...</p>
           </div>
         ) : allocations.length === 0 ? (
           <div className="py-16 text-center p-8">
-            <KeyRound className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-            <h3 className="text-sm font-semibold text-slate-300">No Allocations Found</h3>
+            <KeyRound className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+            <h3 className="text-sm font-semibold text-slate-800">No Allocations Found</h3>
             <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
               No allocation records match the current filter selection.
             </p>
             {canManage && (
               <button
                 onClick={handleOpenAllocateModal}
-                className="mt-4 px-4 py-2 text-xs font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white transition-all inline-flex items-center gap-1.5"
+                className="mt-4 px-4 py-2 text-xs font-semibold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white transition-all inline-flex items-center gap-1.5"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Allocate Student Now</span>
@@ -560,7 +560,7 @@ export default function AllocationsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-slate-950/60 border-b border-slate-800 text-slate-400 font-semibold uppercase tracking-wider">
+                <tr className="bg-slate-50 border-b border-slate-200 text-slate-600 font-semibold uppercase tracking-wider">
                   <th className="px-5 py-3.5">Student Resident</th>
                   <th className="px-5 py-3.5">Allocated Room</th>
                   <th className="px-5 py-3.5">Academic Year</th>
@@ -570,28 +570,28 @@ export default function AllocationsPage() {
                   <th className="px-5 py-3.5 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 text-slate-300">
+              <tbody className="divide-y divide-slate-100 text-slate-700">
                 {allocations.map((alloc) => {
                   const isActive = alloc.status === 'ACTIVE';
                   const isTransferred = alloc.status === 'TRANSFERRED';
                   const isVacated = alloc.status === 'VACATED';
 
                   return (
-                    <tr key={alloc.id} className="hover:bg-slate-800/40 transition-colors">
+                    <tr key={alloc.id} className="hover:bg-emerald-50/40 transition-colors">
                       {/* Student */}
-                      <td className="px-5 py-4 font-medium text-white">
+                      <td className="px-5 py-4 font-medium text-slate-900">
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs font-bold shrink-0">
+                          <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">
                             {alloc.student_name ? alloc.student_name.charAt(0) : 'S'}
                           </div>
                           <div>
                             <div className="flex items-center gap-2">
-                              <span className="font-bold text-white">{alloc.student_name}</span>
-                              <span className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-slate-800 text-slate-300">
+                              <span className="font-bold text-slate-900">{alloc.student_name}</span>
+                              <span className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-slate-200 text-slate-700">
                                 {alloc.roll_number}
                               </span>
                             </div>
-                            <p className="text-[11px] text-slate-400 mt-0.5">
+                            <p className="text-[11px] text-slate-500 mt-0.5">
                               {alloc.department} • Year {alloc.year_of_study}
                             </p>
                           </div>
@@ -602,34 +602,34 @@ export default function AllocationsPage() {
                       <td className="px-5 py-4">
                         <div className="space-y-1">
                           <div className="flex items-center gap-1.5">
-                            <span className="px-2 py-0.5 text-xs font-bold rounded-lg bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-mono">
+                            <span className="px-2 py-0.5 text-xs font-bold rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono">
                               Room {alloc.room_number}
                             </span>
-                            <span className="text-[11px] text-slate-400 font-medium">
+                            <span className="text-[11px] text-slate-500 font-medium">
                               (Floor {alloc.floor})
                             </span>
                           </div>
-                          <p className="text-[11px] text-slate-400 flex items-center gap-1">
-                            <Building2 className="w-3 h-3 text-slate-500" />
+                          <p className="text-[11px] text-slate-500 flex items-center gap-1">
+                            <Building2 className="w-3 h-3 text-slate-400" />
                             <span>{alloc.hostel_name}</span>
                           </p>
                         </div>
                       </td>
 
                       {/* Academic Year */}
-                      <td className="px-5 py-4 font-mono text-slate-300">
+                      <td className="px-5 py-4 font-mono text-slate-700">
                         {alloc.academic_year}
                       </td>
 
                       {/* Period */}
-                      <td className="px-5 py-4 text-slate-300">
+                      <td className="px-5 py-4 text-slate-700">
                         <div className="space-y-0.5 text-[11px]">
-                          <div className="flex items-center gap-1 text-slate-300">
-                            <Calendar className="w-3 h-3 text-emerald-400" />
+                          <div className="flex items-center gap-1 text-slate-700">
+                            <Calendar className="w-3 h-3 text-emerald-600" />
                             <span>From: {new Date(alloc.allocated_from).toLocaleDateString()}</span>
                           </div>
                           {alloc.vacated_at ? (
-                            <div className="flex items-center gap-1 text-rose-400">
+                            <div className="flex items-center gap-1 text-rose-600">
                               <Clock className="w-3 h-3" />
                               <span>Vacated: {new Date(alloc.vacated_at).toLocaleDateString()}</span>
                             </div>
@@ -638,13 +638,13 @@ export default function AllocationsPage() {
                               <span>To: {new Date(alloc.allocated_to).toLocaleDateString()}</span>
                             </div>
                           ) : (
-                            <span className="text-emerald-400 font-medium text-[10px]">Ongoing Residency</span>
+                            <span className="text-emerald-600 font-medium text-[10px]">Ongoing Residency</span>
                           )}
                         </div>
                       </td>
 
                       {/* Deposit */}
-                      <td className="px-5 py-4 font-semibold text-slate-200">
+                      <td className="px-5 py-4 font-semibold text-slate-800">
                         ₹{Number(alloc.security_deposit).toLocaleString('en-IN')}
                       </td>
 
@@ -653,12 +653,12 @@ export default function AllocationsPage() {
                         <span
                           className={`inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-semibold border ${
                             isActive
-                              ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
+                              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
                               : isTransferred
-                              ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
+                              ? 'bg-teal-50 text-teal-700 border-teal-200'
                               : isVacated
-                              ? 'bg-slate-800 text-slate-400 border-slate-700'
-                              : 'bg-rose-500/10 text-rose-400 border-rose-500/20'
+                              ? 'bg-slate-100 text-slate-600 border-slate-200'
+                              : 'bg-rose-50 text-rose-700 border-rose-200'
                           }`}
                         >
                           {alloc.status}
@@ -673,17 +673,17 @@ export default function AllocationsPage() {
                               setSelectedAlloc(alloc);
                               setDetailsModalOpen(true);
                             }}
-                            className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+                            className="p-2 text-slate-500 hover:text-emerald-700 rounded-lg hover:bg-emerald-50 transition-colors"
                             title="View Allocation Details"
                           >
-                            <Eye className="w-4 h-4 text-indigo-400" />
+                            <Eye className="w-4 h-4 text-emerald-600" />
                           </button>
 
                           {canManage && isActive && (
                             <>
                               <button
                                 onClick={() => handleOpenTransferModal(alloc)}
-                                className="p-2 text-blue-400 hover:text-blue-300 rounded-lg hover:bg-blue-500/10 transition-colors"
+                                className="p-2 text-teal-600 hover:text-teal-700 rounded-lg hover:bg-teal-50 transition-colors"
                                 title="Transfer Room"
                               >
                                 <ArrowRightLeft className="w-4 h-4" />
@@ -691,7 +691,7 @@ export default function AllocationsPage() {
 
                               <button
                                 onClick={() => handleOpenCheckoutModal(alloc)}
-                                className="p-2 text-rose-400 hover:text-rose-300 rounded-lg hover:bg-rose-500/10 transition-colors"
+                                className="p-2 text-rose-500 hover:text-rose-700 rounded-lg hover:bg-rose-50 transition-colors"
                                 title="Vacate / Check Out"
                               >
                                 <LogOut className="w-4 h-4" />
@@ -710,7 +710,7 @@ export default function AllocationsPage() {
 
         {/* Pagination Bar */}
         {pagination.totalPages > 1 && (
-          <div className="p-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400 bg-slate-950/40">
+          <div className="p-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 bg-slate-50/60">
             <span>
               Showing {allocations.length} of {pagination.total} records (Page {pagination.page} of {pagination.totalPages})
             </span>
@@ -718,14 +718,14 @@ export default function AllocationsPage() {
               <button
                 onClick={() => fetchAllocationsList(pagination.page - 1)}
                 disabled={!pagination.hasPrev}
-                className="px-3 py-1.5 rounded-xl border border-slate-800 bg-slate-900 text-slate-300 hover:bg-slate-800 disabled:opacity-40 transition-all"
+                className="px-3 py-1.5 rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 disabled:opacity-40 transition-all shadow-xs"
               >
                 Previous
               </button>
               <button
                 onClick={() => fetchAllocationsList(pagination.page + 1)}
                 disabled={!pagination.hasNext}
-                className="px-3 py-1.5 rounded-xl border border-slate-800 bg-slate-900 text-slate-300 hover:bg-slate-800 disabled:opacity-40 transition-all"
+                className="px-3 py-1.5 rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 disabled:opacity-40 transition-all shadow-xs"
               >
                 Next
               </button>
@@ -738,23 +738,23 @@ export default function AllocationsPage() {
       {/* ALLOCATION DETAILS MODAL                                                  */}
       {/* ========================================================================= */}
       {detailsModalOpen && selectedAlloc && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl p-6 text-white space-y-5">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-xl max-h-[90vh] overflow-y-auto shadow-2xl p-6 text-slate-800 space-y-5">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div className="flex items-center gap-3">
-                <span className="p-2.5 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                <span className="p-2.5 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-200">
                   <KeyRound className="w-6 h-6" />
                 </span>
                 <div>
-                  <h3 className="text-lg font-bold">Allocation Record #{selectedAlloc.id}</h3>
-                  <p className="text-xs text-slate-400">
-                    Status: <span className="text-emerald-400 font-semibold">{selectedAlloc.status}</span> | Academic Year: {selectedAlloc.academic_year}
+                  <h3 className="text-lg font-bold text-slate-900">Allocation Record #{selectedAlloc.id}</h3>
+                  <p className="text-xs text-slate-500">
+                    Status: <span className="text-emerald-600 font-semibold">{selectedAlloc.status}</span> | Academic Year: {selectedAlloc.academic_year}
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setDetailsModalOpen(false)}
-                className="p-1.5 text-slate-400 hover:text-white rounded-lg bg-slate-800 transition-colors"
+                className="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg bg-slate-100 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -762,19 +762,19 @@ export default function AllocationsPage() {
 
             <div className="space-y-4 text-xs">
               {/* Student Profile Box */}
-              <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-2">
-                <h4 className="text-xs font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 className="text-xs font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-1.5">
                   <User className="w-3.5 h-3.5" />
                   <span>Resident Student</span>
                 </h4>
-                <div className="grid grid-cols-2 gap-3 text-slate-300">
+                <div className="grid grid-cols-2 gap-3 text-slate-700">
                   <div>
                     <span className="text-slate-500 block text-[11px]">Full Name</span>
-                    <span className="font-bold text-white text-sm">{selectedAlloc.student_name}</span>
+                    <span className="font-bold text-slate-900 text-sm">{selectedAlloc.student_name}</span>
                   </div>
                   <div>
                     <span className="text-slate-500 block text-[11px]">Register / Roll Number</span>
-                    <span className="font-mono text-slate-200 font-bold">{selectedAlloc.roll_number}</span>
+                    <span className="font-mono text-slate-800 font-bold">{selectedAlloc.roll_number}</span>
                   </div>
                   <div>
                     <span className="text-slate-500 block text-[11px]">Department & Year</span>
@@ -788,19 +788,19 @@ export default function AllocationsPage() {
               </div>
 
               {/* Room & Hostel Box */}
-              <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-2">
-                <h4 className="text-xs font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 className="text-xs font-bold text-teal-700 uppercase tracking-wider flex items-center gap-1.5">
                   <Building2 className="w-3.5 h-3.5" />
                   <span>Hostel & Room Assigned</span>
                 </h4>
-                <div className="grid grid-cols-2 gap-3 text-slate-300">
+                <div className="grid grid-cols-2 gap-3 text-slate-700">
                   <div>
                     <span className="text-slate-500 block text-[11px]">Hostel Block</span>
-                    <span className="font-bold text-white">{selectedAlloc.hostel_name} ({selectedAlloc.hostel_code})</span>
+                    <span className="font-bold text-slate-900">{selectedAlloc.hostel_name} ({selectedAlloc.hostel_code})</span>
                   </div>
                   <div>
                     <span className="text-slate-500 block text-[11px]">Room Number</span>
-                    <span className="font-bold text-indigo-400 font-mono text-sm">Room {selectedAlloc.room_number} (Floor {selectedAlloc.floor})</span>
+                    <span className="font-bold text-emerald-700 font-mono text-sm">Room {selectedAlloc.room_number} (Floor {selectedAlloc.floor})</span>
                   </div>
                   <div>
                     <span className="text-slate-500 block text-[11px]">Room Type & Capacity</span>
@@ -808,25 +808,25 @@ export default function AllocationsPage() {
                   </div>
                   <div>
                     <span className="text-slate-500 block text-[11px]">Base Monthly Rent</span>
-                    <span className="font-semibold text-slate-200">₹{Number(selectedAlloc.base_rent).toLocaleString('en-IN')}</span>
+                    <span className="font-semibold text-slate-800">₹{Number(selectedAlloc.base_rent).toLocaleString('en-IN')}</span>
                   </div>
                 </div>
               </div>
 
               {/* Timeline & Deposit */}
-              <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-2">
-                <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 className="text-xs font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-1.5">
                   <Calendar className="w-3.5 h-3.5" />
                   <span>Allocation Timeline & Deposit</span>
                 </h4>
-                <div className="grid grid-cols-2 gap-3 text-slate-300">
+                <div className="grid grid-cols-2 gap-3 text-slate-700">
                   <div>
                     <span className="text-slate-500 block text-[11px]">Allocated Date</span>
-                    <span className="font-medium text-white">{new Date(selectedAlloc.allocated_from).toLocaleDateString()}</span>
+                    <span className="font-medium text-slate-900">{new Date(selectedAlloc.allocated_from).toLocaleDateString()}</span>
                   </div>
                   <div>
                     <span className="text-slate-500 block text-[11px]">Security Deposit</span>
-                    <span className="font-bold text-emerald-400">₹{Number(selectedAlloc.security_deposit).toLocaleString('en-IN')}</span>
+                    <span className="font-bold text-emerald-600">₹{Number(selectedAlloc.security_deposit).toLocaleString('en-IN')}</span>
                   </div>
                   <div>
                     <span className="text-slate-500 block text-[11px]">Allocated By</span>
@@ -839,18 +839,18 @@ export default function AllocationsPage() {
                 </div>
 
                 {selectedAlloc.remarks && (
-                  <div className="mt-2 pt-2 border-t border-slate-800/80">
+                  <div className="mt-2 pt-2 border-t border-slate-200">
                     <span className="text-slate-500 block text-[11px]">Remarks & Notes</span>
-                    <p className="text-slate-300 italic">{selectedAlloc.remarks}</p>
+                    <p className="text-slate-600 italic">{selectedAlloc.remarks}</p>
                   </div>
                 )}
               </div>
             </div>
 
-            <div className="flex justify-end pt-3 border-t border-slate-800">
+            <div className="flex justify-end pt-3 border-t border-slate-100">
               <button
                 onClick={() => setDetailsModalOpen(false)}
-                className="px-5 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-white transition-all"
+                className="px-5 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all"
               >
                 Close
               </button>
@@ -863,24 +863,24 @@ export default function AllocationsPage() {
       {/* STUDENT ROOM ALLOCATION WIZARD MODAL                                      */}
       {/* ========================================================================= */}
       {allocateModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl p-6 text-white space-y-5">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl p-6 text-slate-800 space-y-5">
             {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <div className="flex items-center gap-3">
-                <span className="p-2.5 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                <span className="p-2.5 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-200">
                   <KeyRound className="w-6 h-6" />
                 </span>
                 <div>
-                  <h3 className="text-lg font-bold">New Room Allocation Wizard</h3>
-                  <p className="text-xs text-slate-400">
+                  <h3 className="text-lg font-bold text-slate-900">New Room Allocation Wizard</h3>
+                  <p className="text-xs text-slate-500">
                     Step {allocateStep} of 4: {allocateStep === 1 ? 'Select Student' : allocateStep === 2 ? 'Select Hostel & Room' : allocateStep === 3 ? 'Dates & Deposit' : 'Confirm Assignment'}
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setAllocateModalOpen(false)}
-                className="p-1.5 text-slate-400 hover:text-white rounded-lg bg-slate-800 transition-colors"
+                className="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg bg-slate-100 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -893,10 +893,10 @@ export default function AllocationsPage() {
                   key={idx}
                   className={`py-1.5 rounded-lg border transition-all ${
                     allocateStep === idx + 1
-                      ? 'bg-indigo-600 border-indigo-500 text-white shadow-xs'
+                      ? 'bg-emerald-600 border-emerald-600 text-white shadow-xs'
                       : allocateStep > idx + 1
-                      ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
-                      : 'bg-slate-950 border-slate-800 text-slate-500'
+                      ? 'bg-emerald-50 border-emerald-200 text-emerald-700'
+                      : 'bg-slate-100 border-slate-200 text-slate-500'
                   }`}
                 >
                   {stepName}
@@ -905,7 +905,7 @@ export default function AllocationsPage() {
             </div>
 
             {formError && (
-              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center gap-2">
+              <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{formError}</span>
               </div>
@@ -915,19 +915,19 @@ export default function AllocationsPage() {
             {allocateStep === 1 && (
               <div className="space-y-3">
                 <div className="relative">
-                  <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                  <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                   <input
                     type="text"
                     placeholder="Search candidate student by name, roll number, department..."
                     value={modalStudentSearch}
                     onChange={(e) => setModalStudentSearch(e.target.value)}
-                    className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-950/70 border border-slate-800 text-white placeholder-slate-500 focus:outline-hidden focus:border-indigo-500"
+                    className="w-full pl-9 pr-4 py-2 text-xs rounded-xl bg-slate-50 border border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-hidden focus:border-emerald-500 focus:bg-white"
                   />
                 </div>
 
                 <div className="max-h-64 overflow-y-auto space-y-2 pr-1">
                   {filteredModalStudents.length === 0 ? (
-                    <div className="p-8 text-center bg-slate-950/40 rounded-2xl border border-slate-800">
+                    <div className="p-8 text-center bg-slate-50 rounded-2xl border border-slate-200">
                       <p className="text-xs text-slate-500">No matching students found.</p>
                     </div>
                   ) : (
@@ -941,22 +941,22 @@ export default function AllocationsPage() {
                           onClick={() => setFormData({ ...formData, studentId: student.id.toString() })}
                           className={`p-3 rounded-2xl border transition-all cursor-pointer flex items-center justify-between ${
                             isSelected
-                              ? 'bg-indigo-600/10 border-indigo-500 text-white'
-                              : 'bg-slate-950/60 border-slate-800 hover:border-slate-700 text-slate-300'
+                              ? 'bg-emerald-50 border-emerald-500 text-slate-900'
+                              : 'bg-white border-slate-200 hover:border-emerald-300 text-slate-700'
                           }`}
                         >
                           <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs font-bold shrink-0">
+                            <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">
                               {student.name.charAt(0)}
                             </div>
                             <div>
                               <div className="flex items-center gap-2">
-                                <span className="font-bold text-white text-xs">{student.name}</span>
-                                <span className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-slate-800 text-slate-300">
+                                <span className="font-bold text-slate-900 text-xs">{student.name}</span>
+                                <span className="px-1.5 py-0.5 text-[10px] font-mono rounded bg-slate-200 text-slate-700">
                                   {student.roll_number}
                                 </span>
                               </div>
-                              <p className="text-[11px] text-slate-400">
+                              <p className="text-[11px] text-slate-500">
                                 {student.department} • Year {student.year_of_study} • {student.gender}
                               </p>
                             </div>
@@ -964,11 +964,11 @@ export default function AllocationsPage() {
 
                           <div className="text-right">
                             {hasRoom ? (
-                              <span className="px-2 py-0.5 text-[10px] font-semibold rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                              <span className="px-2 py-0.5 text-[10px] font-semibold rounded bg-amber-50 text-amber-700 border border-amber-200">
                                 In Room {student.room_number}
                               </span>
                             ) : (
-                              <span className="px-2 py-0.5 text-[10px] font-semibold rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                              <span className="px-2 py-0.5 text-[10px] font-semibold rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                                 No Room Assigned
                               </span>
                             )}
@@ -979,11 +979,11 @@ export default function AllocationsPage() {
                   )}
                 </div>
 
-                <div className="flex justify-end gap-2 pt-3 border-t border-slate-800">
+                <div className="flex justify-end gap-2 pt-3 border-t border-slate-100">
                   <button
                     type="button"
                     onClick={() => setAllocateModalOpen(false)}
-                    className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-800 text-slate-300"
+                    className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200"
                   >
                     Cancel
                   </button>
@@ -994,7 +994,7 @@ export default function AllocationsPage() {
                       if (!formData.studentId) return;
                       setAllocateStep(2);
                     }}
-                    className="px-5 py-2 text-xs font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white disabled:opacity-40 transition-all flex items-center gap-1.5"
+                    className="px-5 py-2 text-xs font-semibold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white disabled:opacity-40 transition-all flex items-center gap-1.5 shadow-md shadow-emerald-600/20"
                   >
                     <span>Continue to Room Selection</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -1007,11 +1007,11 @@ export default function AllocationsPage() {
             {allocateStep === 2 && (
               <div className="space-y-4 text-xs">
                 <div>
-                  <label className="block text-slate-400 font-semibold mb-1">Select Hostel Block *</label>
+                  <label className="block text-slate-600 font-semibold mb-1">Select Hostel Block *</label>
                   <select
                     value={formData.hostelId}
                     onChange={(e) => setFormData({ ...formData, hostelId: e.target.value, roomId: '' })}
-                    className="w-full px-3 py-2 rounded-xl bg-slate-950/80 border border-slate-800 text-white focus:outline-hidden focus:border-indigo-500"
+                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-hidden focus:border-emerald-500 focus:bg-white"
                   >
                     <option value="">-- Choose Hostel Block --</option>
                     {hostelsList.map((h) => (
@@ -1023,19 +1023,19 @@ export default function AllocationsPage() {
                 </div>
 
                 <div>
-                  <label className="block text-slate-400 font-semibold mb-2">Available Rooms with Vacant Beds *</label>
+                  <label className="block text-slate-600 font-semibold mb-2">Available Rooms with Vacant Beds *</label>
 
                   {loadingAvailableRooms ? (
                     <div className="py-12 flex flex-col items-center justify-center">
-                      <Loader2 className="w-6 h-6 text-indigo-400 animate-spin mb-1" />
-                      <p className="text-[11px] text-slate-400">Loading vacant rooms in block...</p>
+                      <Loader2 className="w-6 h-6 text-emerald-600 animate-spin mb-1" />
+                      <p className="text-[11px] text-slate-500">Loading vacant rooms in block...</p>
                     </div>
                   ) : !formData.hostelId ? (
-                    <p className="text-slate-500 italic p-4 text-center bg-slate-950/40 rounded-xl border border-slate-800">
+                    <p className="text-slate-500 italic p-4 text-center bg-slate-50 rounded-xl border border-slate-200">
                       Please select a hostel block first to view vacant rooms.
                     </p>
                   ) : availableRoomsList.length === 0 ? (
-                    <div className="p-6 text-center bg-slate-950/40 rounded-xl border border-slate-800 text-slate-400">
+                    <div className="p-6 text-center bg-slate-50 rounded-xl border border-slate-200 text-slate-500">
                       No vacant rooms available in this block currently.
                     </div>
                   ) : (
@@ -1048,19 +1048,19 @@ export default function AllocationsPage() {
                             onClick={() => setFormData({ ...formData, roomId: room.room_id.toString() })}
                             className={`p-3 rounded-xl border transition-all cursor-pointer flex flex-col justify-between ${
                               isSelected
-                                ? 'bg-indigo-600/20 border-indigo-500 text-white'
-                                : 'bg-slate-950/70 border-slate-800 hover:border-slate-700 text-slate-300'
+                                ? 'bg-emerald-50 border-emerald-500 text-slate-900'
+                                : 'bg-white border-slate-200 hover:border-emerald-300 text-slate-700'
                             }`}
                           >
                             <div className="flex items-center justify-between">
-                              <span className="font-bold text-white text-xs">Room {room.room_number}</span>
-                              <span className="px-1.5 py-0.5 text-[9px] font-semibold rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                              <span className="font-bold text-slate-900 text-xs">Room {room.room_number}</span>
+                              <span className="px-1.5 py-0.5 text-[9px] font-semibold rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
                                 {room.available} Free
                               </span>
                             </div>
-                            <div className="mt-2 text-[10px] text-slate-400 space-y-0.5">
+                            <div className="mt-2 text-[10px] text-slate-500 space-y-0.5">
                               <p>Floor {room.floor} • {room.room_type}</p>
-                              <p className="font-medium text-slate-300">₹{Number(room.base_rent).toLocaleString('en-IN')}/mo</p>
+                              <p className="font-medium text-emerald-700">₹{Number(room.base_rent).toLocaleString('en-IN')}/mo</p>
                             </div>
                           </div>
                         );
@@ -1069,11 +1069,11 @@ export default function AllocationsPage() {
                   )}
                 </div>
 
-                <div className="flex justify-between pt-3 border-t border-slate-800">
+                <div className="flex justify-between pt-3 border-t border-slate-100">
                   <button
                     type="button"
                     onClick={() => setAllocateStep(1)}
-                    className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-800 text-slate-300"
+                    className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200"
                   >
                     Back
                   </button>
@@ -1081,7 +1081,7 @@ export default function AllocationsPage() {
                     type="button"
                     disabled={!formData.hostelId || !formData.roomId}
                     onClick={() => setAllocateStep(3)}
-                    className="px-5 py-2 text-xs font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white disabled:opacity-40 transition-all flex items-center gap-1.5"
+                    className="px-5 py-2 text-xs font-semibold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white disabled:opacity-40 transition-all flex items-center gap-1.5 shadow-md shadow-emerald-600/20"
                   >
                     <span>Continue to Dates & Deposit</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -1095,69 +1095,69 @@ export default function AllocationsPage() {
               <div className="space-y-4 text-xs">
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-slate-400 font-semibold mb-1">Academic Year *</label>
+                    <label className="block text-slate-600 font-semibold mb-1">Academic Year *</label>
                     <input
                       type="text"
                       required
                       placeholder="2025-2026"
                       value={formData.academicYear}
                       onChange={(e) => setFormData({ ...formData, academicYear: e.target.value })}
-                      className="w-full px-3 py-2 rounded-xl bg-slate-950/80 border border-slate-800 text-white focus:outline-hidden focus:border-indigo-500"
+                      className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-hidden focus:border-emerald-500 focus:bg-white"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-slate-400 font-semibold mb-1">Security Deposit (₹)</label>
+                    <label className="block text-slate-600 font-semibold mb-1">Security Deposit (₹)</label>
                     <input
                       type="number"
                       min="0"
                       step="100"
                       value={formData.securityDeposit}
                       onChange={(e) => setFormData({ ...formData, securityDeposit: e.target.value })}
-                      className="w-full px-3 py-2 rounded-xl bg-slate-950/80 border border-slate-800 text-white focus:outline-hidden focus:border-indigo-500"
+                      className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-hidden focus:border-emerald-500 focus:bg-white"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-slate-400 font-semibold mb-1">Allocation Start Date *</label>
+                    <label className="block text-slate-600 font-semibold mb-1">Allocation Start Date *</label>
                     <input
                       type="date"
                       required
                       value={formData.allocatedFrom}
                       onChange={(e) => setFormData({ ...formData, allocatedFrom: e.target.value })}
-                      className="w-full px-3 py-2 rounded-xl bg-slate-950/80 border border-slate-800 text-white focus:outline-hidden focus:border-indigo-500"
+                      className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-hidden focus:border-emerald-500 focus:bg-white"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-slate-400 font-semibold mb-1">Allocation End Date (Optional)</label>
+                    <label className="block text-slate-600 font-semibold mb-1">Allocation End Date (Optional)</label>
                     <input
                       type="date"
                       value={formData.allocatedTo}
                       onChange={(e) => setFormData({ ...formData, allocatedTo: e.target.value })}
-                      className="w-full px-3 py-2 rounded-xl bg-slate-950/80 border border-slate-800 text-white focus:outline-hidden focus:border-indigo-500"
+                      className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-hidden focus:border-emerald-500 focus:bg-white"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-slate-400 font-semibold mb-1">Special Remarks / Allocation Notes</label>
+                  <label className="block text-slate-600 font-semibold mb-1">Special Remarks / Allocation Notes</label>
                   <textarea
                     rows="2"
                     placeholder="Medical preferences, special accommodations, key issuance..."
                     value={formData.remarks}
                     onChange={(e) => setFormData({ ...formData, remarks: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl bg-slate-950/80 border border-slate-800 text-white focus:outline-hidden focus:border-indigo-500"
+                    className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-hidden focus:border-emerald-500 focus:bg-white"
                   />
                 </div>
 
-                <div className="flex justify-between pt-3 border-t border-slate-800">
+                <div className="flex justify-between pt-3 border-t border-slate-100">
                   <button
                     type="button"
                     onClick={() => setAllocateStep(2)}
-                    className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-800 text-slate-300"
+                    className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200"
                   >
                     Back
                   </button>
@@ -1165,7 +1165,7 @@ export default function AllocationsPage() {
                     type="button"
                     disabled={!formData.allocatedFrom || !formData.academicYear}
                     onClick={() => setAllocateStep(4)}
-                    className="px-5 py-2 text-xs font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white disabled:opacity-40 transition-all flex items-center gap-1.5"
+                    className="px-5 py-2 text-xs font-semibold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white disabled:opacity-40 transition-all flex items-center gap-1.5 shadow-md shadow-emerald-600/20"
                   >
                     <span>Review & Confirm</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -1177,39 +1177,39 @@ export default function AllocationsPage() {
             {/* STEP 4: REVIEW & CONFIRM */}
             {allocateStep === 4 && (
               <div className="space-y-4 text-xs">
-                <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-3">
-                  <h4 className="text-xs font-bold text-white uppercase tracking-wider">Assignment Confirmation</h4>
+                <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                  <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Assignment Confirmation</h4>
 
-                  <div className="grid grid-cols-2 gap-3 text-slate-300">
+                  <div className="grid grid-cols-2 gap-3 text-slate-700">
                     <div>
                       <span className="text-slate-500 block text-[11px]">Resident Student</span>
-                      <span className="font-bold text-white text-sm">{selectedStudentObj?.name}</span>
-                      <span className="text-xs text-slate-400 block font-mono">{selectedStudentObj?.roll_number}</span>
+                      <span className="font-bold text-slate-900 text-sm">{selectedStudentObj?.name}</span>
+                      <span className="text-xs text-slate-500 block font-mono">{selectedStudentObj?.roll_number}</span>
                     </div>
 
                     <div>
                       <span className="text-slate-500 block text-[11px]">Assigned Room</span>
-                      <span className="font-bold text-indigo-400 text-sm">Room {selectedRoomObj?.room_number}</span>
-                      <span className="text-xs text-slate-400 block">{selectedHostelObj?.name} (Floor {selectedRoomObj?.floor})</span>
+                      <span className="font-bold text-emerald-700 text-sm">Room {selectedRoomObj?.room_number}</span>
+                      <span className="text-xs text-slate-500 block">{selectedHostelObj?.name} (Floor {selectedRoomObj?.floor})</span>
                     </div>
 
                     <div>
                       <span className="text-slate-500 block text-[11px]">Academic Year & Start Date</span>
-                      <span className="font-medium text-slate-200">{formData.academicYear} • {formData.allocatedFrom}</span>
+                      <span className="font-medium text-slate-800">{formData.academicYear} • {formData.allocatedFrom}</span>
                     </div>
 
                     <div>
                       <span className="text-slate-500 block text-[11px]">Security Deposit</span>
-                      <span className="font-bold text-emerald-400 text-sm">₹{Number(formData.securityDeposit).toLocaleString('en-IN')}</span>
+                      <span className="font-bold text-emerald-600 text-sm">₹{Number(formData.securityDeposit).toLocaleString('en-IN')}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex justify-between pt-3 border-t border-slate-800">
+                <div className="flex justify-between pt-3 border-t border-slate-100">
                   <button
                     type="button"
                     onClick={() => setAllocateStep(3)}
-                    className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-800 text-slate-300"
+                    className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200"
                   >
                     Back
                   </button>
@@ -1217,7 +1217,7 @@ export default function AllocationsPage() {
                     type="button"
                     onClick={handleConfirmAllocation}
                     disabled={submitting}
-                    className="px-6 py-2 text-xs font-semibold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white flex items-center gap-1.5 transition-all shadow-md shadow-emerald-600/30"
+                    className="px-6 py-2 text-xs font-semibold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white flex items-center gap-1.5 transition-all shadow-md shadow-emerald-600/20"
                   >
                     {submitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                     <span>Confirm & Execute Allocation</span>
@@ -1233,41 +1233,41 @@ export default function AllocationsPage() {
       {/* ROOM TRANSFER MODAL                                                       */}
       {/* ========================================================================= */}
       {transferModalOpen && allocToTransfer && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-lg shadow-2xl p-6 text-white space-y-4">
-            <div className="flex items-center gap-3 text-blue-400 border-b border-slate-800 pb-3">
-              <span className="p-2.5 rounded-2xl bg-blue-500/10 border border-blue-500/20">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-lg shadow-2xl p-6 text-slate-800 space-y-4">
+            <div className="flex items-center gap-3 text-teal-600 border-b border-slate-100 pb-3">
+              <span className="p-2.5 rounded-2xl bg-teal-50 border border-teal-200">
                 <ArrowRightLeft className="w-6 h-6" />
               </span>
               <div>
-                <h3 className="text-lg font-bold text-white">Transfer Resident Student</h3>
-                <p className="text-xs text-slate-400">
+                <h3 className="text-lg font-bold text-slate-900">Transfer Resident Student</h3>
+                <p className="text-xs text-slate-500">
                   {allocToTransfer.student_name} ({allocToTransfer.roll_number})
                 </p>
               </div>
             </div>
 
             {transferError && (
-              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center gap-2">
+              <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{transferError}</span>
               </div>
             )}
 
             <form onSubmit={handleConfirmTransfer} className="space-y-4 text-xs">
-              <div className="p-3 rounded-xl bg-slate-950/70 border border-slate-800">
-                <p className="text-slate-400 text-[11px]">Current Allocation:</p>
-                <p className="font-bold text-white text-sm">
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                <p className="text-slate-500 text-[11px]">Current Allocation:</p>
+                <p className="font-bold text-slate-900 text-sm">
                   {allocToTransfer.hostel_name} • Room {allocToTransfer.room_number} (Floor {allocToTransfer.floor})
                 </p>
               </div>
 
               <div>
-                <label className="block text-slate-400 font-semibold mb-1">Destination Hostel Block *</label>
+                <label className="block text-slate-600 font-semibold mb-1">Destination Hostel Block *</label>
                 <select
                   value={transferHostelId}
                   onChange={(e) => setTransferHostelId(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950/80 border border-slate-800 text-white focus:outline-hidden focus:border-indigo-500"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-hidden focus:border-emerald-500 focus:bg-white"
                 >
                   {hostelsList.map((h) => (
                     <option key={h.id} value={h.id}>
@@ -1278,12 +1278,12 @@ export default function AllocationsPage() {
               </div>
 
               <div>
-                <label className="block text-slate-400 font-semibold mb-1">Destination Vacant Room *</label>
+                <label className="block text-slate-600 font-semibold mb-1">Destination Vacant Room *</label>
                 <select
                   required
                   value={transferRoomId}
                   onChange={(e) => setTransferRoomId(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950/80 border border-slate-800 text-white focus:outline-hidden focus:border-indigo-500"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-hidden focus:border-emerald-500 focus:bg-white"
                 >
                   <option value="">-- Choose New Room --</option>
                   {transferRoomsList.map((r) => (
@@ -1294,18 +1294,18 @@ export default function AllocationsPage() {
                 </select>
               </div>
 
-              <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-800">
+              <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setTransferModalOpen(false)}
-                  className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all"
+                  className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={transferring || !transferRoomId}
-                  className="px-5 py-2 text-xs font-semibold rounded-xl bg-blue-600 hover:bg-blue-500 text-white flex items-center gap-1.5 transition-all shadow-md shadow-blue-600/30"
+                  className="px-5 py-2 text-xs font-semibold rounded-xl bg-teal-600 hover:bg-teal-500 text-white flex items-center gap-1.5 transition-all shadow-md shadow-teal-600/20"
                 >
                   {transferring && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   <span>Execute Transfer</span>
@@ -1320,27 +1320,27 @@ export default function AllocationsPage() {
       {/* VACATE / CHECKOUT MODAL                                                   */}
       {/* ========================================================================= */}
       {checkoutModalOpen && allocToCheckout && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-md shadow-2xl p-6 text-white space-y-4">
-            <div className="flex items-center gap-3 text-rose-400 border-b border-slate-800 pb-3">
-              <span className="p-2.5 rounded-2xl bg-rose-500/10 border border-rose-500/20">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-md shadow-2xl p-6 text-slate-800 space-y-4">
+            <div className="flex items-center gap-3 text-rose-600 border-b border-slate-100 pb-3">
+              <span className="p-2.5 rounded-2xl bg-rose-50 border border-rose-200">
                 <LogOut className="w-6 h-6" />
               </span>
               <div>
-                <h3 className="text-lg font-bold text-white">Vacate Room & Check Out</h3>
-                <p className="text-xs text-slate-400">
+                <h3 className="text-lg font-bold text-slate-900">Vacate Room & Check Out</h3>
+                <p className="text-xs text-slate-500">
                   {allocToCheckout.student_name} ({allocToCheckout.roll_number})
                 </p>
               </div>
             </div>
 
-            <p className="text-xs text-slate-300 leading-relaxed">
-              Confirm check-out for <span className="font-bold text-white">Room {allocToCheckout.room_number}</span> in <span className="font-bold text-white">{allocToCheckout.hostel_name}</span>.
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Confirm check-out for <span className="font-bold text-slate-900">Room {allocToCheckout.room_number}</span> in <span className="font-bold text-slate-900">{allocToCheckout.hostel_name}</span>.
               This will release the bed capacity and update student accommodation status to vacated.
             </p>
 
             {checkoutError && (
-              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 text-xs flex items-center gap-2">
+              <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{checkoutError}</span>
               </div>
@@ -1348,28 +1348,28 @@ export default function AllocationsPage() {
 
             <form onSubmit={handleConfirmCheckout} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-400 font-semibold mb-1">Clearance Remarks / Notes</label>
+                <label className="block text-slate-600 font-semibold mb-1">Clearance Remarks / Notes</label>
                 <textarea
                   rows="2"
                   placeholder="Key returned, room inspection passed, dues cleared..."
                   value={checkoutRemarks}
                   onChange={(e) => setCheckoutRemarks(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-950/80 border border-slate-800 text-white focus:outline-hidden focus:border-indigo-500"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 focus:outline-hidden focus:border-emerald-500 focus:bg-white"
                 />
               </div>
 
-              <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-800">
+              <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setCheckoutModalOpen(false)}
-                  className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition-all"
+                  className="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-all"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={checkingOut}
-                  className="px-5 py-2 text-xs font-semibold rounded-xl bg-rose-600 hover:bg-rose-500 text-white flex items-center gap-1.5 transition-all shadow-md shadow-rose-600/30"
+                  className="px-5 py-2 text-xs font-semibold rounded-xl bg-rose-600 hover:bg-rose-500 text-white flex items-center gap-1.5 transition-all shadow-md shadow-rose-600/20"
                 >
                   {checkingOut && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   <span>Confirm Check Out</span>

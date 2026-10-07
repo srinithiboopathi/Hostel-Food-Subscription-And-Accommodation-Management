@@ -25,7 +25,7 @@ export default function AccommodationNav() {
   ];
 
   return (
-    <div className="flex flex-wrap items-center gap-2 p-1.5 bg-slate-900/80 border border-slate-800/80 rounded-2xl backdrop-blur-xl">
+    <div className="flex flex-wrap items-center gap-2 p-1.5 bg-white border border-slate-200/80 rounded-2xl shadow-xs">
       {navItems.map((item) => {
         const Icon = item.icon;
         return (
@@ -33,10 +33,10 @@ export default function AccommodationNav() {
             key={item.to}
             to={item.to}
             className={({ isActive }) =>
-              `flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+              `flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all duration-150 ${
                 isActive
-                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-sm shadow-emerald-600/20'
+                  : 'text-slate-600 hover:text-emerald-700 hover:bg-emerald-50/70'
               }`
             }
           >

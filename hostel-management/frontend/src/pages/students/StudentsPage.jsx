@@ -418,7 +418,7 @@ export default function StudentsPage() {
                         <button
                           onClick={() => handleOpenView(st)}
                           title="View Profile"
-                          className="p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+                          className="p-1.5 text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
                         >
                           <Eye className="w-4 h-4" />
                         </button>
@@ -477,7 +477,7 @@ export default function StudentsPage() {
       {/* ADD / EDIT STUDENT MODAL */}
       {/* ========================================================================= */}
       {(isAddModalOpen || isEditModalOpen) && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in">
           <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 p-6 sm:p-8">
             <div className="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
               <div>
@@ -511,7 +511,7 @@ export default function StudentsPage() {
             <form onSubmit={isAddModalOpen ? handleAddSubmit : handleEditSubmit} className="space-y-5">
               {/* Academic & Identity */}
               <div>
-                <h3 className="text-xs font-bold text-indigo-700 uppercase tracking-wider mb-3">
+                <h3 className="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-3">
                   1. Academic & Identity
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -524,7 +524,7 @@ export default function StudentsPage() {
                       value={formData.name}
                       onChange={handleFormChange}
                       placeholder="e.g. Sriram D"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
                     />
                   </div>
 
@@ -537,7 +537,7 @@ export default function StudentsPage() {
                       value={formData.rollNumber}
                       onChange={handleFormChange}
                       placeholder="e.g. CS2025088"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
                     />
                   </div>
 
@@ -550,7 +550,7 @@ export default function StudentsPage() {
                       value={formData.email}
                       onChange={handleFormChange}
                       placeholder="sriram.d@student.edu"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
                     />
                   </div>
 
@@ -562,7 +562,7 @@ export default function StudentsPage() {
                       value={formData.phone}
                       onChange={handleFormChange}
                       placeholder="+91 98765 43210"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
                     />
                   </div>
 
@@ -572,7 +572,7 @@ export default function StudentsPage() {
                       name="department"
                       value={formData.department}
                       onChange={handleFormChange}
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-indigo-500"
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-emerald-500"
                     >
                       <option value="Computer Science & Engineering">Computer Science & Engineering</option>
                       <option value="Electronics & Communication">Electronics & Communication</option>
@@ -591,7 +591,7 @@ export default function StudentsPage() {
                         value={formData.course}
                         onChange={handleFormChange}
                         placeholder="B.Tech CSE"
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-indigo-500"
+                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-emerald-500"
                       />
                     </div>
                     <div>
@@ -600,7 +600,7 @@ export default function StudentsPage() {
                         name="yearOfStudy"
                         value={formData.yearOfStudy}
                         onChange={handleFormChange}
-                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-indigo-500"
+                        className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-emerald-500"
                       >
                         <option value={1}>1st Year</option>
                         <option value={2}>2nd Year</option>
@@ -614,7 +614,7 @@ export default function StudentsPage() {
 
               {/* Guardian & Contact */}
               <div className="pt-3 border-t border-slate-200">
-                <h3 className="text-xs font-bold text-indigo-700 uppercase tracking-wider mb-3">
+                <h3 className="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-3">
                   2. Guardian & Residential Details
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
@@ -627,7 +627,7 @@ export default function StudentsPage() {
                       value={formData.guardianName}
                       onChange={handleFormChange}
                       placeholder="e.g. D. Ramamoorthy"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-indigo-500"
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-emerald-500"
                     />
                   </div>
                   <div>
@@ -639,7 +639,7 @@ export default function StudentsPage() {
                       value={formData.guardianPhone}
                       onChange={handleFormChange}
                       placeholder="+91 98765 11223"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-indigo-500"
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-emerald-500"
                     />
                   </div>
                   <div>
@@ -650,7 +650,7 @@ export default function StudentsPage() {
                       value={formData.guardianRelation}
                       onChange={handleFormChange}
                       placeholder="Father / Mother"
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-indigo-500"
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-emerald-500"
                     />
                   </div>
                 </div>
@@ -663,7 +663,7 @@ export default function StudentsPage() {
                     value={formData.permanentAddress}
                     onChange={handleFormChange}
                     placeholder="Door No, Street, City, State, PIN"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-indigo-500 resize-none"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-emerald-500 resize-none"
                   />
                 </div>
               </div>
@@ -683,7 +683,7 @@ export default function StudentsPage() {
                 <button
                   type="submit"
                   disabled={formSubmitting}
-                  className="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-sm shadow-sm transition-all active:scale-95 disabled:opacity-50"
+                  className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl text-sm shadow-md shadow-emerald-600/20 transition-all active:scale-95 disabled:opacity-50"
                 >
                   {formSubmitting ? (
                     <span className="flex items-center gap-2">
@@ -705,16 +705,16 @@ export default function StudentsPage() {
       {/* VIEW STUDENT DETAILS MODAL */}
       {/* ========================================================================= */}
       {isViewModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in">
           <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 p-6 sm:p-8">
             <div className="flex items-center justify-between pb-4 border-b border-slate-200 mb-6">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">
                   {selectedStudent?.name?.charAt(0) || 'S'}
                 </div>
                 <div>
                   <h2 className="text-lg font-bold text-slate-800">{selectedStudent?.name}</h2>
-                  <p className="text-xs text-indigo-600 font-mono font-semibold">
+                  <p className="text-xs text-emerald-600 font-mono font-semibold">
                     Roll No: {selectedStudent?.roll_number}
                   </p>
                 </div>
@@ -729,7 +729,7 @@ export default function StudentsPage() {
 
             {viewLoading ? (
               <div className="py-12 text-center text-slate-500">
-                <Loader2 className="w-8 h-8 text-indigo-600 animate-spin mx-auto mb-2" />
+                <Loader2 className="w-8 h-8 text-emerald-600 animate-spin mx-auto mb-2" />
                 <p className="text-sm">Fetching complete student profile...</p>
               </div>
             ) : selectedStudent ? (
@@ -801,7 +801,7 @@ export default function StudentsPage() {
             <div className="mt-6 pt-4 border-t border-slate-200 text-right">
               <button
                 onClick={() => setIsViewModalOpen(false)}
-                className="px-5 py-2 bg-slate-800 hover:bg-slate-900 text-white font-semibold rounded-xl text-sm transition-colors"
+                className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl text-sm shadow-md shadow-emerald-600/20 transition-all active:scale-95"
               >
                 Close View
               </button>

@@ -45,11 +45,11 @@ export default function Topbar({ onToggleSidebar }) {
 
   // Quick Role Switching Demo Accounts
   const demoAccounts = [
-    { role: 'ADMIN', name: 'System Admin', email: 'admin@hostel.edu', badge: 'bg-rose-500/20 text-rose-300' },
-    { role: 'WARDEN', name: 'Chief Warden', email: 'warden@hostel.edu', badge: 'bg-amber-500/20 text-amber-300' },
-    { role: 'MESS_MANAGER', name: 'Mess Manager', email: 'mess@hostel.edu', badge: 'bg-emerald-500/20 text-emerald-300' },
-    { role: 'ACCOUNTANT', name: 'Chief Accountant', email: 'accounts@hostel.edu', badge: 'bg-cyan-500/20 text-cyan-300' },
-    { role: 'STUDENT', name: 'Aarav Patel (Student)', email: 'aarav.patel@student.edu', badge: 'bg-indigo-500/20 text-indigo-300' },
+    { role: 'ADMIN', name: 'System Admin', email: 'admin@hostel.edu', badge: 'bg-rose-50 text-rose-700 border border-rose-200' },
+    { role: 'WARDEN', name: 'Chief Warden', email: 'warden@hostel.edu', badge: 'bg-amber-50 text-amber-700 border border-amber-200' },
+    { role: 'MESS_MANAGER', name: 'Mess Manager', email: 'mess@hostel.edu', badge: 'bg-emerald-50 text-emerald-700 border border-emerald-200' },
+    { role: 'ACCOUNTANT', name: 'Chief Accountant', email: 'accounts@hostel.edu', badge: 'bg-teal-50 text-teal-700 border border-teal-200' },
+    { role: 'STUDENT', name: 'Aarav Patel (Student)', email: 'aarav.patel@student.edu', badge: 'bg-emerald-50 text-emerald-700 border border-emerald-200' },
   ];
 
   const handleQuickSwitch = async (account) => {
@@ -134,17 +134,17 @@ export default function Topbar({ onToggleSidebar }) {
   const getNotificationIcon = (type) => {
     switch (type) {
       case 'LEAVE':
-        return <Calendar className="w-3.5 h-3.5 text-amber-400" />;
+        return <Calendar className="w-3.5 h-3.5 text-amber-600" />;
       case 'COMPLAINT':
-        return <MessageSquareWarning className="w-3.5 h-3.5 text-rose-400" />;
+        return <MessageSquareWarning className="w-3.5 h-3.5 text-rose-600" />;
       case 'FEES':
-        return <CreditCard className="w-3.5 h-3.5 text-emerald-400" />;
+        return <CreditCard className="w-3.5 h-3.5 text-emerald-600" />;
       case 'ROOM':
-        return <KeyRound className="w-3.5 h-3.5 text-blue-400" />;
+        return <KeyRound className="w-3.5 h-3.5 text-teal-600" />;
       case 'MESS':
-        return <Utensils className="w-3.5 h-3.5 text-orange-400" />;
+        return <Utensils className="w-3.5 h-3.5 text-amber-600" />;
       default:
-        return <Bell className="w-3.5 h-3.5 text-indigo-400" />;
+        return <Bell className="w-3.5 h-3.5 text-emerald-600" />;
     }
   };
 
@@ -164,12 +164,12 @@ export default function Topbar({ onToggleSidebar }) {
   };
 
   return (
-    <header className="sticky top-0 z-30 h-16 bg-[#0c1222]/90 backdrop-blur-xl border-b border-slate-800/80 px-4 lg:px-8 flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-30 h-16 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-4 lg:px-8 flex items-center justify-between gap-4 shadow-xs">
       {/* Left: Mobile Toggle & Search */}
       <div className="flex items-center gap-4 flex-1">
         <button
           onClick={onToggleSidebar}
-          className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 lg:hidden"
+          className="p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-100 lg:hidden"
         >
           <Menu className="w-5 h-5" />
         </button>
@@ -179,7 +179,7 @@ export default function Topbar({ onToggleSidebar }) {
           <input
             type="text"
             placeholder="Search students, rooms, bills, tickets..."
-            className="w-full pl-10 pr-4 py-1.5 bg-slate-900/60 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-400 focus:outline-hidden focus:border-indigo-500/80 transition-colors"
+            className="w-full pl-10 pr-4 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-colors"
           />
         </div>
       </div>
@@ -190,28 +190,28 @@ export default function Topbar({ onToggleSidebar }) {
         <div className="relative">
           <button
             onClick={() => setShowRoleMenu(!showRoleMenu)}
-            className="flex items-center gap-2 px-3 py-1.5 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 rounded-xl text-xs font-semibold transition-all duration-200"
+            className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100/70 border border-emerald-200 text-emerald-800 rounded-xl text-xs font-semibold transition-all duration-150 cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5" />
+            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
             <span className="hidden md:inline">Switch Role</span>
-            <ChevronDown className="w-3 h-3" />
+            <ChevronDown className="w-3 h-3 text-emerald-600" />
           </button>
 
           {showRoleMenu && (
-            <div className="absolute right-0 mt-2 w-72 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
-              <div className="p-2 border-b border-slate-800 mb-1">
-                <p className="text-xs font-semibold text-white">Live Role Switching</p>
-                <p className="text-[11px] text-slate-400">Instantly switch between database personas</p>
+            <div className="absolute right-0 mt-2 w-72 bg-white border border-slate-200 rounded-2xl shadow-xl p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
+              <div className="p-2.5 border-b border-slate-100 mb-1">
+                <p className="text-xs font-bold text-slate-900">Live Role Switching</p>
+                <p className="text-[11px] text-slate-500">Instantly test different database personas</p>
               </div>
               <div className="space-y-1">
                 {demoAccounts.map((acc) => (
                   <button
                     key={acc.role}
                     onClick={() => handleQuickSwitch(acc)}
-                    className={`w-full flex items-center justify-between p-2 rounded-xl text-left text-xs transition-colors ${
+                    className={`w-full flex items-center justify-between p-2 rounded-xl text-left text-xs transition-colors cursor-pointer ${
                       role === acc.role
-                        ? 'bg-indigo-600/20 border border-indigo-500/40 text-white'
-                        : 'hover:bg-slate-800 text-slate-300'
+                        ? 'bg-emerald-50 border border-emerald-200 text-emerald-900 font-semibold'
+                        : 'hover:bg-slate-50 text-slate-700'
                     }`}
                   >
                     <div>
@@ -219,9 +219,9 @@ export default function Topbar({ onToggleSidebar }) {
                       <p className="text-[10px] text-slate-400">{acc.email}</p>
                     </div>
                     {role === acc.role ? (
-                      <CheckCircle2 className="w-4 h-4 text-indigo-400" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                     ) : (
-                      <span className={`text-[9px] px-1.5 py-0.5 rounded-full ${acc.badge}`}>
+                      <span className={`text-[9px] px-2 py-0.5 rounded-full font-medium ${acc.badge}`}>
                         {acc.role}
                       </span>
                     )}
@@ -236,26 +236,26 @@ export default function Topbar({ onToggleSidebar }) {
         <div className="relative" ref={notifRef}>
           <button
             onClick={handleToggleNotifications}
-            className="relative p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/60 transition-colors"
+            className="relative p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors cursor-pointer"
             title="Notifications"
           >
             <Bell className="w-5 h-5" />
             {unreadCount > 0 && (
-              <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-rose-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center ring-2 ring-[#0c1222] animate-pulse">
+              <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-amber-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center ring-2 ring-white shadow-xs">
                 {unreadCount > 99 ? '99+' : unreadCount}
               </span>
             )}
           </button>
 
           {showNotificationMenu && (
-            <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white border border-slate-200 rounded-2xl shadow-xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
               {/* Dropdown Header */}
-              <div className="p-3.5 bg-slate-950/70 border-b border-slate-800 flex items-center justify-between">
+              <div className="p-3.5 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Bell className="w-4 h-4 text-indigo-400" />
-                  <h3 className="text-xs font-bold text-white">Notifications</h3>
+                  <Bell className="w-4 h-4 text-emerald-600" />
+                  <h3 className="text-xs font-bold text-slate-900">Notifications</h3>
                   {unreadCount > 0 && (
-                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
                       {unreadCount} new
                     </span>
                   )}
@@ -264,7 +264,7 @@ export default function Topbar({ onToggleSidebar }) {
                 {unreadCount > 0 && (
                   <button
                     onClick={handleMarkAllRead}
-                    className="text-[11px] font-semibold text-indigo-400 hover:text-indigo-300 flex items-center gap-1 transition-colors"
+                    className="text-[11px] font-semibold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 transition-colors cursor-pointer"
                   >
                     <CheckCheck className="w-3.5 h-3.5" />
                     <span>Mark all read</span>
@@ -273,40 +273,44 @@ export default function Topbar({ onToggleSidebar }) {
               </div>
 
               {/* Notification Items List */}
-              <div className="max-h-80 overflow-y-auto divide-y divide-slate-800/60">
+              <div className="max-h-80 overflow-y-auto divide-y divide-slate-100">
                 {loadingNotifs ? (
                   <div className="py-8 text-center text-xs text-slate-400">
                     <p>Loading alerts...</p>
                   </div>
                 ) : recentNotifications.length === 0 ? (
                   <div className="py-8 px-4 text-center">
-                    <CheckCircle2 className="w-7 h-7 text-slate-600 mx-auto mb-2" />
-                    <p className="text-xs text-slate-400">No new notifications</p>
-                    <p className="text-[11px] text-slate-500 mt-0.5">You're all caught up!</p>
+                    <img
+                      src="/images/illustrations/empty-notifications.svg"
+                      alt="No notifications"
+                      className="w-20 h-20 mx-auto mb-2 opacity-80"
+                    />
+                    <p className="text-xs font-semibold text-slate-700">No new notifications</p>
+                    <p className="text-[11px] text-slate-400 mt-0.5">You're all caught up!</p>
                   </div>
                 ) : (
                   recentNotifications.map((n) => (
                     <div
                       key={n.id}
                       onClick={() => handleNotificationClick(n)}
-                      className="p-3 hover:bg-slate-800/80 transition-colors cursor-pointer flex items-start gap-3"
+                      className="p-3 hover:bg-slate-50 transition-colors cursor-pointer flex items-start gap-3"
                     >
-                      <div className="p-2 rounded-xl bg-slate-800 shrink-0 border border-slate-700">
+                      <div className="p-2 rounded-xl bg-slate-50 shrink-0 border border-slate-200">
                         {getNotificationIcon(n.type)}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-1">
-                          <p className="text-xs font-semibold text-slate-200 truncate">{n.title}</p>
-                          <span className="text-[10px] text-slate-500 shrink-0 font-mono">
+                          <p className="text-xs font-semibold text-slate-800 truncate">{n.title}</p>
+                          <span className="text-[10px] text-slate-400 shrink-0 font-mono">
                             {formatTime(n.created_at)}
                           </span>
                         </div>
-                        <p className="text-[11px] text-slate-400 line-clamp-2 mt-0.5 leading-snug">
+                        <p className="text-[11px] text-slate-500 line-clamp-2 mt-0.5 leading-snug">
                           {n.message}
                         </p>
                       </div>
                       {!n.is_read && (
-                        <span className="w-2 h-2 rounded-full bg-indigo-500 shrink-0 mt-1.5" />
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 mt-1.5" />
                       )}
                     </div>
                   ))
@@ -314,13 +318,13 @@ export default function Topbar({ onToggleSidebar }) {
               </div>
 
               {/* Footer: View All Notifications Link */}
-              <div className="p-2.5 bg-slate-950/70 border-t border-slate-800 text-center">
+              <div className="p-2.5 bg-slate-50 border-t border-slate-100 text-center">
                 <button
                   onClick={() => {
                     setShowNotificationMenu(false);
                     navigate('/notifications');
                   }}
-                  className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 inline-flex items-center gap-1.5 transition-colors py-1 px-3 rounded-lg hover:bg-indigo-500/10"
+                  className="text-xs font-semibold text-emerald-600 hover:text-emerald-700 inline-flex items-center gap-1.5 transition-colors py-1 px-3 rounded-lg hover:bg-emerald-50 cursor-pointer"
                 >
                   <span>View All Notifications</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -334,25 +338,25 @@ export default function Topbar({ onToggleSidebar }) {
         <div className="relative">
           <button
             onClick={() => setShowProfileMenu(!showProfileMenu)}
-            className="flex items-center gap-2.5 p-1.5 rounded-xl hover:bg-slate-800/60 transition-colors"
+            className="flex items-center gap-2.5 p-1.5 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer"
           >
             <img
-              src={user?.avatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || user?.fullName || 'User')}&background=4f46e5&color=fff`}
+              src={user?.avatarUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || user?.fullName || 'User')}&background=059669&color=fff`}
               alt={user?.name || user?.fullName}
-              className="w-8 h-8 rounded-full object-cover border border-slate-700"
+              className="w-8 h-8 rounded-full object-cover border border-emerald-200 shadow-xs"
             />
             <div className="hidden lg:block text-left">
-              <p className="text-xs font-semibold text-white leading-tight">{(user?.name || user?.fullName)?.split(' ')[0]}</p>
-              <p className="text-[10px] text-indigo-400 font-mono">{role}</p>
+              <p className="text-xs font-semibold text-slate-800 leading-tight">{(user?.name || user?.fullName)?.split(' ')[0]}</p>
+              <p className="text-[10px] text-emerald-600 font-semibold">{role}</p>
             </div>
             <ChevronDown className="w-3.5 h-3.5 text-slate-400 hidden lg:block" />
           </button>
 
           {showProfileMenu && (
-            <div className="absolute right-0 mt-2 w-56 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl p-1.5 z-50">
-              <div className="p-3 border-b border-slate-800">
-                <p className="text-xs font-bold text-white">{user?.name || user?.fullName}</p>
-                <p className="text-[11px] text-slate-400 truncate">{user?.email}</p>
+            <div className="absolute right-0 mt-2 w-56 bg-white border border-slate-200 rounded-2xl shadow-xl p-1.5 z-50">
+              <div className="p-3 border-b border-slate-100">
+                <p className="text-xs font-bold text-slate-900">{user?.name || user?.fullName}</p>
+                <p className="text-[11px] text-slate-500 truncate">{user?.email}</p>
               </div>
               <div className="py-1">
                 <button
@@ -360,9 +364,9 @@ export default function Topbar({ onToggleSidebar }) {
                     setShowProfileMenu(false);
                     navigate('/profile');
                   }}
-                  className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-slate-300 hover:bg-slate-800 rounded-xl transition-colors"
+                  className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-800 rounded-xl transition-colors cursor-pointer"
                 >
-                  <User className="w-4 h-4 text-indigo-400" />
+                  <User className="w-4 h-4 text-emerald-600" />
                   <span>My Profile</span>
                 </button>
                 <button
@@ -370,14 +374,14 @@ export default function Topbar({ onToggleSidebar }) {
                     setShowProfileMenu(false);
                     navigate('/notifications');
                   }}
-                  className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-slate-300 hover:bg-slate-800 rounded-xl transition-colors"
+                  className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-800 rounded-xl transition-colors cursor-pointer"
                 >
-                  <Bell className="w-4 h-4 text-indigo-400" />
+                  <Bell className="w-4 h-4 text-emerald-600" />
                   <span>My Notifications</span>
                 </button>
                 <button
                   onClick={logout}
-                  className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-rose-400 hover:bg-rose-500/10 rounded-xl transition-colors"
+                  className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-rose-600 hover:bg-rose-50 rounded-xl transition-colors cursor-pointer"
                 >
                   <LogOut className="w-4 h-4" />
                   <span>Sign Out</span>

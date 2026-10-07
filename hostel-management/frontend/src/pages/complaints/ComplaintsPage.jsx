@@ -55,17 +55,17 @@ import {
   Cell,
 } from 'recharts';
 
-const CHART_COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899', '#06B6D4', '#64748B'];
+const CHART_COLORS = ['#059669', '#0d9488', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4', '#64748b'];
 
 const CATEGORIES = [
-  { value: 'ROOM_MAINTENANCE', label: 'Room Maintenance', icon: Building2, color: 'text-amber-500' },
-  { value: 'ELECTRICAL', label: 'Electrical & Power', icon: Zap, color: 'text-yellow-500' },
-  { value: 'PLUMBING', label: 'Plumbing & Water', icon: Wrench, color: 'text-blue-500' },
-  { value: 'MESS_FOOD', label: 'Mess & Food', icon: UtensilsCrossed, color: 'text-orange-500' },
-  { value: 'CLEANLINESS', label: 'Cleanliness & Hygiene', icon: Sparkles, color: 'text-teal-500' },
-  { value: 'INTERNET', label: 'Wi-Fi & Internet', icon: Wifi, color: 'text-indigo-500' },
-  { value: 'SECURITY', label: 'Security & Safety', icon: Shield, color: 'text-rose-500' },
-  { value: 'NOISE', label: 'Noise & Disturbance', icon: Volume2, color: 'text-purple-500' },
+  { value: 'ROOM_MAINTENANCE', label: 'Room Maintenance', icon: Building2, color: 'text-amber-600' },
+  { value: 'ELECTRICAL', label: 'Electrical & Power', icon: Zap, color: 'text-yellow-600' },
+  { value: 'PLUMBING', label: 'Plumbing & Water', icon: Wrench, color: 'text-teal-600' },
+  { value: 'MESS_FOOD', label: 'Mess & Food', icon: UtensilsCrossed, color: 'text-orange-600' },
+  { value: 'CLEANLINESS', label: 'Cleanliness & Hygiene', icon: Sparkles, color: 'text-emerald-600' },
+  { value: 'INTERNET', label: 'Wi-Fi & Internet', icon: Wifi, color: 'text-cyan-600' },
+  { value: 'SECURITY', label: 'Security & Safety', icon: Shield, color: 'text-rose-600' },
+  { value: 'NOISE', label: 'Noise & Disturbance', icon: Volume2, color: 'text-purple-600' },
   { value: 'OTHER', label: 'General / Other', icon: HelpCircle, color: 'text-slate-500' },
 ];
 
@@ -278,25 +278,25 @@ export default function ComplaintsPage() {
     switch (prio) {
       case 'URGENT':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-rose-500 text-white animate-pulse shadow-sm">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500 text-white animate-pulse shadow-sm">
             <AlertTriangle className="w-3 h-3" /> Urgent
           </span>
         );
       case 'HIGH':
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 dark:bg-amber-950/50 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
             High
           </span>
         );
       case 'LOW':
         return (
-          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-600">
             Low
           </span>
         );
       default:
         return (
-          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-teal-50 text-teal-700 border border-teal-200">
             Medium
           </span>
         );
@@ -308,77 +308,85 @@ export default function ComplaintsPage() {
     switch (status) {
       case 'RESOLVED':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
-            <CheckCircle2 className="w-3.5 h-3.5" /> Resolved
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" /> Resolved
           </span>
         );
       case 'IN_PROGRESS':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
-            <Clock className="w-3.5 h-3.5 animate-spin" /> In Progress
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+            <Clock className="w-3.5 h-3.5 animate-spin text-amber-600" /> In Progress
           </span>
         );
       case 'REJECTED':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
-            <X className="w-3.5 h-3.5" /> Rejected
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200">
+            <X className="w-3.5 h-3.5 text-rose-600" /> Rejected
           </span>
         );
       default:
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
-            <Clock className="w-3.5 h-3.5" /> Pending
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-50 text-teal-700 border border-teal-200">
+            <Clock className="w-3.5 h-3.5 text-teal-600" /> Pending
           </span>
         );
     }
   };
 
   return (
-    <div className="space-y-6">
-      {/* Header Banner */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-6 rounded-2xl text-white shadow-xl">
-        <div>
-          <div className="flex items-center gap-2 text-indigo-300 text-sm font-medium mb-1">
-            <MessageSquareWarning className="w-4 h-4" />
-            <span>Grievance & Facilities Maintenance</span>
+    <div className="space-y-6 pb-12">
+      {/* Hero Header Banner */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 p-8 text-white shadow-xl">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-15 mix-blend-overlay"
+          style={{ backgroundImage: `url('/images/campus/campus-hero.jpg')` }}
+        />
+        <div className="absolute -right-10 -bottom-10 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-400/20 text-emerald-300 border border-emerald-400/30 text-xs font-semibold mb-2">
+              <MessageSquareWarning className="w-3.5 h-3.5" />
+              Grievance & Facilities Maintenance
+            </div>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">
+              Complaints & Maintenance Hub
+            </h1>
+            <p className="text-slate-300 text-sm mt-1 max-w-2xl">
+              {isStudent
+                ? 'Raise maintenance issues, track real-time resolution timelines, and stay updated with warden actions.'
+                : 'Real-time ticket tracking, staff dispatch, multi-step repair workflows, and facility health telemetry.'}
+            </p>
           </div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
-            Complaints & Maintenance Hub
-          </h1>
-          <p className="text-slate-300 text-sm mt-1 max-w-2xl">
-            {isStudent
-              ? 'Raise maintenance issues, track real-time resolution timelines, and stay updated with warden actions.'
-              : 'Real-time ticket tracking, staff dispatch, multi-step repair workflows, and facility health telemetry.'}
-          </p>
-        </div>
 
-        <div className="flex flex-wrap items-center gap-3">
-          {canManage && (
+          <div className="flex flex-wrap items-center gap-3">
+            {canManage && (
+              <button
+                onClick={() => setShowCharts(!showCharts)}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm backdrop-blur-sm transition-all border border-white/15"
+              >
+                <BarChart3 className="w-4 h-4" />
+                <span>{showCharts ? 'Hide Analytics' : 'Show Analytics'}</span>
+              </button>
+            )}
+
             <button
-              onClick={() => setShowCharts(!showCharts)}
-              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm backdrop-blur-sm transition-all border border-white/10"
+              onClick={() => setCreateModalOpen(true)}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm shadow-lg shadow-emerald-900/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
-              <BarChart3 className="w-4 h-4" />
-              <span>{showCharts ? 'Hide Analytics' : 'Show Analytics'}</span>
+              <Plus className="w-4 h-4" />
+              <span>{isStudent ? 'Raise Grievance' : 'Log Maintenance Ticket'}</span>
             </button>
-          )}
-
-          <button
-            onClick={() => setCreateModalOpen(true)}
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-indigo-500 to-blue-600 hover:from-indigo-600 hover:to-blue-700 text-white font-semibold text-sm shadow-lg shadow-indigo-500/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
-          >
-            <Plus className="w-4 h-4" />
-            <span>{isStudent ? 'Raise Grievance' : 'Log Maintenance Ticket'}</span>
-          </button>
+          </div>
         </div>
       </div>
 
       {/* Success Notification */}
       {actionSuccess && (
-        <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 flex items-center justify-between shadow-sm animate-fade-in">
+        <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-center justify-between shadow-card animate-fade-in">
           <div className="flex items-center gap-3">
-            <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-            <span className="text-sm font-medium">{actionSuccess}</span>
+            <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+            <span className="text-sm font-semibold">{actionSuccess}</span>
           </div>
           <button onClick={() => setActionSuccess(null)} className="text-emerald-600 hover:text-emerald-800">
             <X className="w-4 h-4" />
@@ -389,72 +397,72 @@ export default function ComplaintsPage() {
       {/* KPI Overview Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Total Tickets */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+        <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-card hover:shadow-card-hover transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Total Registered</span>
-            <div className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/50 flex items-center justify-center text-blue-600 dark:text-blue-400">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Total Registered</span>
+            <div className="w-9 h-9 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600">
               <MessageSquareWarning className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-bold text-slate-900 dark:text-white">
+            <div className="text-2xl font-bold text-slate-800">
               {statsLoading ? '...' : stats?.overview?.total_complaints || complaints.length}
             </div>
-            <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            <div className="text-xs text-slate-400 mt-1">
               All Grievance Tickets
             </div>
           </div>
         </div>
 
         {/* Pending Action */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+        <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-card hover:shadow-card-hover transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Pending Review</span>
-            <div className="w-9 h-9 rounded-xl bg-amber-50 dark:bg-amber-950/50 flex items-center justify-center text-amber-600 dark:text-amber-400">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Pending Review</span>
+            <div className="w-9 h-9 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600">
               <Clock className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-bold text-amber-600 dark:text-amber-400">
+            <div className="text-2xl font-bold text-amber-600">
               {statsLoading ? '...' : stats?.overview?.pending_count || 0}
             </div>
-            <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            <div className="text-xs text-slate-400 mt-1">
               {stats?.overview?.unassigned_count || 0} Unassigned
             </div>
           </div>
         </div>
 
         {/* In Progress / Active Repairs */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+        <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-card hover:shadow-card-hover transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">In Progress</span>
-            <div className="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">In Progress</span>
+            <div className="w-9 h-9 rounded-xl bg-cyan-50 flex items-center justify-center text-cyan-600">
               <Wrench className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+            <div className="text-2xl font-bold text-cyan-700">
               {statsLoading ? '...' : stats?.overview?.in_progress_count || 0}
             </div>
-            <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            <div className="text-xs text-slate-400 mt-1">
               Active Technician Dispatches
             </div>
           </div>
         </div>
 
         {/* Resolved Successfully */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+        <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-card hover:shadow-card-hover transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Resolved</span>
-            <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">Resolved</span>
+            <div className="w-9 h-9 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
               <CheckCircle2 className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+            <div className="text-2xl font-bold text-emerald-700">
               {statsLoading ? '...' : stats?.overview?.resolved_count || 0}
             </div>
-            <div className="text-xs text-emerald-600/80 dark:text-emerald-400/80 mt-1">
+            <div className="text-xs text-emerald-600/80 mt-1">
               Closed & Verified Fixes
             </div>
           </div>
@@ -465,11 +473,11 @@ export default function ComplaintsPage() {
       {showCharts && stats && canManage && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Category Breakdown Bar Chart */}
-          <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+          <div className="lg:col-span-2 bg-white border border-slate-200/80 rounded-2xl p-5 shadow-card">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                  <BarChart3 className="w-4 h-4 text-indigo-500" />
+                <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                  <BarChart3 className="w-4 h-4 text-emerald-600" />
                   Grievances by Category
                 </h3>
                 <p className="text-xs text-slate-500">Distribution of facility maintenance tickets</p>
@@ -483,9 +491,9 @@ export default function ComplaintsPage() {
                     <YAxis stroke="#94A3B8" fontSize={12} tickLine={false} />
                     <Tooltip
                       formatter={(val) => [val, 'Tickets']}
-                      contentStyle={{ backgroundColor: '#0F172A', borderColor: '#334155', color: '#fff', borderRadius: '0.75rem' }}
+                      contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', color: '#0f172a', borderRadius: '0.75rem', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
                     />
-                    <Bar dataKey="count" fill="#6366F1" radius={[6, 6, 0, 0]} />
+                    <Bar dataKey="count" fill="#059669" radius={[6, 6, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               ) : (
@@ -497,11 +505,11 @@ export default function ComplaintsPage() {
           </div>
 
           {/* Priority Distribution Pie */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+          <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-card">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                  <PieChartIcon className="w-4 h-4 text-blue-500" />
+                <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                  <PieChartIcon className="w-4 h-4 text-teal-600" />
                   Severity / Priority Split
                 </h3>
                 <p className="text-xs text-slate-500">Open and resolved urgency split</p>
@@ -526,7 +534,7 @@ export default function ComplaintsPage() {
                       ))}
                     </Pie>
                     <Tooltip
-                      contentStyle={{ backgroundColor: '#0F172A', borderColor: '#334155', color: '#fff', borderRadius: '0.75rem' }}
+                      contentStyle={{ backgroundColor: '#ffffff', borderColor: '#e2e8f0', color: '#0f172a', borderRadius: '0.75rem', boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
                     />
                   </PieChart>
                 </ResponsiveContainer>
@@ -541,7 +549,7 @@ export default function ComplaintsPage() {
       )}
 
       {/* Filter & Search Toolbar */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-card flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Search Input */}
         <div className="relative w-full md:w-80">
           <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -550,7 +558,7 @@ export default function ComplaintsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search ticket, title, student..."
-            className="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900 dark:text-white"
+            className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-800"
           />
         </div>
 
@@ -560,7 +568,7 @@ export default function ComplaintsPage() {
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium"
           >
             <option value="">All Categories</option>
             {CATEGORIES.map((cat) => (
@@ -574,7 +582,7 @@ export default function ComplaintsPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium"
           >
             <option value="">All Statuses</option>
             <option value="PENDING">Pending</option>
@@ -587,7 +595,7 @@ export default function ComplaintsPage() {
           <select
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
-            className="px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium"
           >
             <option value="">All Priorities</option>
             <option value="URGENT">Urgent</option>
@@ -603,7 +611,7 @@ export default function ComplaintsPage() {
               loadStats();
             }}
             title="Refresh Complaints"
-            className="p-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition"
+            className="p-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-100 transition"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
           </button>
@@ -611,11 +619,11 @@ export default function ComplaintsPage() {
       </div>
 
       {/* Complaints Data Table */}
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+      <div className="bg-white border border-slate-200/80 rounded-2xl shadow-card overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50/80 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+              <tr className="bg-slate-50/80 border-b border-slate-100 text-[11px] font-bold uppercase tracking-wider text-slate-500">
                 <th className="py-3.5 px-4">Ticket / Category</th>
                 <th className="py-3.5 px-4">Complaint Title</th>
                 <th className="py-3.5 px-4">Student / Room</th>
@@ -626,17 +634,17 @@ export default function ComplaintsPage() {
                 <th className="py-3.5 px-4 text-center">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-sm">
+            <tbody className="divide-y divide-slate-100 text-sm">
               {loading ? (
                 <tr>
                   <td colSpan="8" className="py-12 text-center text-slate-400">
-                    <Loader2 className="w-6 h-6 animate-spin mx-auto text-indigo-500 mb-2" />
+                    <Loader2 className="w-6 h-6 animate-spin mx-auto text-emerald-600 mb-2" />
                     <span>Loading real-time complaints from MySQL...</span>
                   </td>
                 </tr>
               ) : error ? (
                 <tr>
-                  <td colSpan="8" className="py-10 text-center text-rose-500">
+                  <td colSpan="8" className="py-10 text-center text-rose-600">
                     <AlertCircle className="w-6 h-6 mx-auto mb-2" />
                     <span>{error}</span>
                   </td>
@@ -644,7 +652,7 @@ export default function ComplaintsPage() {
               ) : complaints.length === 0 ? (
                 <tr>
                   <td colSpan="8" className="py-12 text-center text-slate-400">
-                    <MessageSquareWarning className="w-8 h-8 mx-auto text-slate-300 dark:text-slate-600 mb-2" />
+                    <MessageSquareWarning className="w-8 h-8 mx-auto text-slate-300 mb-2" />
                     <span>No complaints found matching criteria.</span>
                   </td>
                 </tr>
@@ -656,14 +664,14 @@ export default function ComplaintsPage() {
                   return (
                     <tr
                       key={c.id}
-                      className="hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors"
+                      className="hover:bg-slate-50/60 transition-colors"
                     >
                       {/* Ticket & Category */}
                       <td className="py-3.5 px-4">
-                        <div className="font-mono text-xs font-bold text-slate-900 dark:text-white">
+                        <div className="font-mono text-xs font-bold text-slate-800">
                           {c.ticket_number}
                         </div>
-                        <div className="flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                        <div className="flex items-center gap-1 text-xs text-slate-500 mt-0.5 font-medium">
                           <Icon className={`w-3.5 h-3.5 ${catMeta.color}`} />
                           <span>{catMeta.label}</span>
                         </div>
@@ -671,17 +679,17 @@ export default function ComplaintsPage() {
 
                       {/* Title */}
                       <td className="py-3.5 px-4 max-w-xs">
-                        <div className="font-semibold text-slate-900 dark:text-white truncate">
+                        <div className="font-semibold text-slate-800 truncate">
                           {c.title}
                         </div>
-                        <div className="text-xs text-slate-500 dark:text-slate-400 truncate mt-0.5">
+                        <div className="text-xs text-slate-500 truncate mt-0.5">
                           {c.description}
                         </div>
                       </td>
 
                       {/* Student & Room */}
                       <td className="py-3.5 px-4">
-                        <div className="font-medium text-slate-900 dark:text-white">
+                        <div className="font-semibold text-slate-800">
                           {c.student_name}
                         </div>
                         <div className="text-xs text-slate-400 flex items-center gap-1.5 mt-0.5">
@@ -708,8 +716,8 @@ export default function ComplaintsPage() {
                       {/* Assigned Staff */}
                       <td className="py-3.5 px-4 text-xs">
                         {c.assigned_to_name ? (
-                          <div className="flex items-center gap-1.5 font-medium text-slate-800 dark:text-slate-200">
-                            <UserCheck className="w-3.5 h-3.5 text-emerald-500" />
+                          <div className="flex items-center gap-1.5 font-medium text-slate-700">
+                            <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
                             <span>{c.assigned_to_name}</span>
                           </div>
                         ) : (
@@ -718,7 +726,7 @@ export default function ComplaintsPage() {
                       </td>
 
                       {/* Date */}
-                      <td className="py-3.5 px-4 text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                      <td className="py-3.5 px-4 text-xs text-slate-500 whitespace-nowrap">
                         {new Date(c.created_at).toLocaleDateString('en-GB', {
                           day: '2-digit',
                           month: 'short',
@@ -733,7 +741,7 @@ export default function ComplaintsPage() {
                           <button
                             onClick={() => handleViewDetails(c.id)}
                             title="View Timeline & Details"
-                            className="p-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                            className="p-1.5 rounded-lg text-slate-600 hover:bg-slate-100 transition"
                           >
                             <Eye className="w-4 h-4" />
                           </button>
@@ -743,7 +751,7 @@ export default function ComplaintsPage() {
                             <button
                               onClick={() => openUpdateModal(c)}
                               title="Update Status / Assign"
-                              className="px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 text-xs font-semibold transition"
+                              className="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xs font-semibold transition"
                             >
                               Update
                             </button>
@@ -754,7 +762,7 @@ export default function ComplaintsPage() {
                             <button
                               onClick={() => handleDelete(c.id, c.ticket_number)}
                               title="Delete Complaint"
-                              className="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition"
+                              className="p-1.5 rounded-lg text-rose-500 hover:bg-rose-50 transition"
                             >
                               <Trash2 className="w-4 h-4" />
                             </button>
@@ -771,7 +779,7 @@ export default function ComplaintsPage() {
 
         {/* Pagination Bar */}
         {pagination.totalPages > 1 && (
-          <div className="p-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">
+          <div className="p-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
             <span>
               Showing {complaints.length} of {pagination.total} tickets
             </span>
@@ -779,17 +787,17 @@ export default function ComplaintsPage() {
               <button
                 disabled={pagination.page <= 1}
                 onClick={() => fetchComplaints(pagination.page - 1)}
-                className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 disabled:opacity-50 hover:bg-slate-50 dark:hover:bg-slate-800"
+                className="px-3 py-1.5 rounded-lg border border-slate-200 disabled:opacity-50 hover:bg-slate-50 font-medium"
               >
                 Previous
               </button>
-              <span className="px-2">
+              <span className="px-2 font-medium">
                 Page {pagination.page} of {pagination.totalPages}
               </span>
               <button
                 disabled={pagination.page >= pagination.totalPages}
                 onClick={() => fetchComplaints(pagination.page + 1)}
-                className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 disabled:opacity-50 hover:bg-slate-50 dark:hover:bg-slate-800"
+                className="px-3 py-1.5 rounded-lg border border-slate-200 disabled:opacity-50 hover:bg-slate-50 font-medium"
               >
                 Next
               </button>
@@ -802,25 +810,27 @@ export default function ComplaintsPage() {
       {/* 1. RAISE COMPLAINT MODAL */}
       {/* ========================================================================= */}
       {createModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 relative animate-in fade-in zoom-in-95">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
-              <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
-                <MessageSquareWarning className="w-5 h-5" />
-                <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 relative animate-in fade-in zoom-in-95">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+              <div className="flex items-center gap-2.5 text-emerald-600">
+                <div className="p-2 bg-emerald-50 rounded-xl border border-emerald-200">
+                  <MessageSquareWarning className="w-5 h-5" />
+                </div>
+                <h2 className="text-lg font-bold text-slate-800">
                   {isStudent ? 'Raise Grievance Ticket' : 'Log Maintenance Complaint'}
                 </h2>
               </div>
               <button
                 onClick={() => setCreateModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-white transition"
+                className="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {createError && (
-              <div className="mt-4 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-200 text-xs flex items-center gap-2">
+              <div className="mt-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{createError}</span>
               </div>
@@ -830,14 +840,14 @@ export default function ComplaintsPage() {
               {/* For Staff: Select Student */}
               {!isStudent && (
                 <div>
-                  <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1">
-                    Student Resident *
+                  <label className="block font-semibold text-xs text-slate-700 mb-1">
+                    Student Resident <span className="text-rose-500">*</span>
                   </label>
                   <select
                     required
                     value={createForm.studentId}
                     onChange={(e) => setCreateForm({ ...createForm, studentId: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium"
                   >
                     <option value="">-- Choose Student --</option>
                     {students.map((st) => (
@@ -852,14 +862,14 @@ export default function ComplaintsPage() {
               {/* Category & Priority */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1">
-                    Category *
+                  <label className="block font-semibold text-xs text-slate-700 mb-1">
+                    Category <span className="text-rose-500">*</span>
                   </label>
                   <select
                     required
                     value={createForm.category}
                     onChange={(e) => setCreateForm({ ...createForm, category: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium"
                   >
                     {CATEGORIES.map((cat) => (
                       <option key={cat.value} value={cat.value}>
@@ -870,14 +880,14 @@ export default function ComplaintsPage() {
                 </div>
 
                 <div>
-                  <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1">
-                    Priority *
+                  <label className="block font-semibold text-xs text-slate-700 mb-1">
+                    Priority <span className="text-rose-500">*</span>
                   </label>
                   <select
                     required
                     value={createForm.priority}
                     onChange={(e) => setCreateForm({ ...createForm, priority: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium"
                   >
                     <option value="LOW">Low</option>
                     <option value="MEDIUM">Medium</option>
@@ -889,8 +899,8 @@ export default function ComplaintsPage() {
 
               {/* Title */}
               <div>
-                <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1">
-                  Subject / Short Title *
+                <label className="block font-semibold text-xs text-slate-700 mb-1">
+                  Subject / Short Title <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -898,14 +908,14 @@ export default function ComplaintsPage() {
                   value={createForm.title}
                   onChange={(e) => setCreateForm({ ...createForm, title: e.target.value })}
                   placeholder="e.g. Study Lamp Switch Tripping in Room 204"
-                  className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium placeholder:text-slate-400"
                 />
               </div>
 
               {/* Description */}
               <div>
-                <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1">
-                  Detailed Description *
+                <label className="block font-semibold text-xs text-slate-700 mb-1">
+                  Detailed Description <span className="text-rose-500">*</span>
                 </label>
                 <textarea
                   rows="4"
@@ -913,23 +923,23 @@ export default function ComplaintsPage() {
                   value={createForm.description}
                   onChange={(e) => setCreateForm({ ...createForm, description: e.target.value })}
                   placeholder="Provide complete details (e.g. location in room, when it started, any damage)..."
-                  className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none placeholder:text-slate-400"
                 />
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setCreateModalOpen(false)}
-                  className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                  className="px-4 py-2 rounded-xl text-slate-500 hover:text-slate-800 font-medium transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={createSubmitting}
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-semibold shadow-md transition"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-semibold shadow-lg shadow-emerald-900/20 transition"
                 >
                   {createSubmitting ? (
                     <>
@@ -950,18 +960,20 @@ export default function ComplaintsPage() {
       {/* 2. COMPLAINT DETAILS & AUDIT TIMELINE MODAL */}
       {/* ========================================================================= */}
       {detailsModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 relative animate-in fade-in zoom-in-95">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
-              <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
-                <MessageSquareWarning className="w-5 h-5" />
-                <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-slate-200 relative animate-in fade-in zoom-in-95">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+              <div className="flex items-center gap-2.5 text-emerald-600">
+                <div className="p-2 bg-emerald-50 rounded-xl border border-emerald-200">
+                  <MessageSquareWarning className="w-5 h-5" />
+                </div>
+                <h2 className="text-lg font-bold text-slate-800">
                   Complaint Details & Resolution Timeline
                 </h2>
               </div>
               <button
                 onClick={() => setDetailsModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-white transition"
+                className="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -969,44 +981,44 @@ export default function ComplaintsPage() {
 
             {loadingDetails || !selectedComplaint ? (
               <div className="py-12 text-center text-slate-400">
-                <Loader2 className="w-6 h-6 animate-spin mx-auto text-indigo-500 mb-2" />
+                <Loader2 className="w-6 h-6 animate-spin mx-auto text-emerald-600 mb-2" />
                 <span>Loading complete complaint lifecycle and timeline...</span>
               </div>
             ) : (
               <div className="mt-4 space-y-5 text-sm">
                 {/* Header Metadata Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl">
-                    <span className="text-xs text-slate-400 block">Ticket No</span>
-                    <span className="font-mono font-bold text-slate-900 dark:text-white">
+                  <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                    <span className="text-xs text-slate-400 block font-medium">Ticket No</span>
+                    <span className="font-mono font-bold text-slate-800">
                       {selectedComplaint.ticket_number}
                     </span>
                   </div>
-                  <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl">
-                    <span className="text-xs text-slate-400 block">Category</span>
-                    <span className="font-semibold text-slate-900 dark:text-white">
+                  <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                    <span className="text-xs text-slate-400 block font-medium">Category</span>
+                    <span className="font-semibold text-slate-800">
                       {selectedComplaint.category}
                     </span>
                   </div>
-                  <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl">
-                    <span className="text-xs text-slate-400 block">Priority</span>
+                  <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                    <span className="text-xs text-slate-400 block font-medium">Priority</span>
                     <div className="mt-0.5">{renderPriorityBadge(selectedComplaint.priority)}</div>
                   </div>
-                  <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl">
-                    <span className="text-xs text-slate-400 block">Status</span>
+                  <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
+                    <span className="text-xs text-slate-400 block font-medium">Status</span>
                     <div className="mt-0.5">{renderStatusBadge(selectedComplaint.status)}</div>
                   </div>
                 </div>
 
                 {/* Subject & Description */}
-                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 space-y-1.5">
-                  <h3 className="font-bold text-slate-900 dark:text-white text-base">
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1.5">
+                  <h3 className="font-bold text-slate-800 text-base">
                     {selectedComplaint.title}
                   </h3>
-                  <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
+                  <p className="text-slate-600 text-xs leading-relaxed font-normal">
                     {selectedComplaint.description}
                   </p>
-                  <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-400 border-t border-slate-200 dark:border-slate-700 mt-2">
+                  <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-400 border-t border-slate-200 mt-2 font-medium">
                     <span>Resident: {selectedComplaint.student_name} ({selectedComplaint.roll_number})</span>
                     <span>Hostel: {selectedComplaint.hostel_name || 'N/A'} (Room {selectedComplaint.room_number || 'N/A'})</span>
                     <span>Assigned: {selectedComplaint.assigned_to_name || 'Unassigned'}</span>
@@ -1015,24 +1027,24 @@ export default function ComplaintsPage() {
 
                 {/* Audit Timeline */}
                 <div>
-                  <h4 className="font-bold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-indigo-500" />
+                  <h4 className="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-emerald-600" />
                     Resolution Activity Timeline ({selectedComplaint.updates?.length || 0})
                   </h4>
 
-                  <div className="space-y-4 max-h-56 overflow-y-auto pl-2 border-l-2 border-indigo-200 dark:border-indigo-900 ml-3">
+                  <div className="space-y-4 max-h-56 overflow-y-auto pl-2 border-l-2 border-emerald-200 ml-3">
                     {selectedComplaint.updates && selectedComplaint.updates.length > 0 ? (
                       selectedComplaint.updates.map((upd, idx) => (
                         <div key={upd.id} className="relative pl-6">
                           {/* Dot indicator */}
-                          <div className="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-indigo-600 border-2 border-white dark:border-slate-900 shadow-sm" />
+                          <div className="absolute -left-[31px] top-1 w-3.5 h-3.5 rounded-full bg-emerald-600 border-2 border-white shadow-sm" />
 
-                          <div className="p-3 bg-slate-50 dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
+                          <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs">
                             <div className="flex items-center justify-between mb-1">
-                              <span className="font-bold text-slate-900 dark:text-white">
+                              <span className="font-bold text-slate-800">
                                 {upd.status_to ? `Status: ${upd.status_to}` : 'Update Logged'}
                               </span>
-                              <span className="text-slate-400 text-[11px]">
+                              <span className="text-slate-400 text-[11px] font-mono">
                                 {new Date(upd.created_at).toLocaleDateString('en-GB', {
                                   day: '2-digit',
                                   month: 'short',
@@ -1042,8 +1054,8 @@ export default function ComplaintsPage() {
                                 })}
                               </span>
                             </div>
-                            <p className="text-slate-600 dark:text-slate-300 mb-1.5">{upd.remarks}</p>
-                            <div className="text-[11px] text-indigo-600 dark:text-indigo-400 font-medium">
+                            <p className="text-slate-600 mb-1.5">{upd.remarks}</p>
+                            <div className="text-[11px] text-emerald-700 font-semibold">
                               Logged by: {upd.updated_by_name} ({upd.updated_by_role})
                             </div>
                           </div>
@@ -1055,21 +1067,21 @@ export default function ComplaintsPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
                   {canManage && (
                     <button
                       onClick={() => {
                         setDetailsModalOpen(false);
                         openUpdateModal(selectedComplaint);
                       }}
-                      className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm transition"
+                      className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm transition shadow-sm"
                     >
                       Update / Assign Staff
                     </button>
                   )}
                   <button
                     onClick={() => setDetailsModalOpen(false)}
-                    className="px-5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-800 font-semibold text-sm transition"
+                    className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm transition"
                   >
                     Close
                   </button>
@@ -1084,25 +1096,27 @@ export default function ComplaintsPage() {
       {/* 3. UPDATE / ASSIGN COMPLAINT MODAL */}
       {/* ========================================================================= */}
       {updateModalOpen && complaintToUpdate && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 relative animate-in fade-in zoom-in-95">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
-              <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400">
-                <UserCheck className="w-5 h-5" />
-                <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200 relative animate-in fade-in zoom-in-95">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+              <div className="flex items-center gap-2.5 text-emerald-600">
+                <div className="p-2 bg-emerald-50 rounded-xl border border-emerald-200">
+                  <UserCheck className="w-5 h-5" />
+                </div>
+                <h2 className="text-lg font-bold text-slate-800">
                   Update Ticket: {complaintToUpdate.ticket_number}
                 </h2>
               </div>
               <button
                 onClick={() => setUpdateModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 dark:hover:text-white transition"
+                className="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {updateError && (
-              <div className="mt-4 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-200 text-xs flex items-center gap-2">
+              <div className="mt-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{updateError}</span>
               </div>
@@ -1112,14 +1126,14 @@ export default function ComplaintsPage() {
               {/* Status & Priority */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1">
-                    Update Status *
+                  <label className="block font-semibold text-xs text-slate-700 mb-1">
+                    Update Status <span className="text-rose-500">*</span>
                   </label>
                   <select
                     required
                     value={updateForm.status}
                     onChange={(e) => setUpdateForm({ ...updateForm, status: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white font-semibold"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500"
                   >
                     <option value="PENDING">PENDING</option>
                     <option value="IN_PROGRESS">IN_PROGRESS</option>
@@ -1129,13 +1143,13 @@ export default function ComplaintsPage() {
                 </div>
 
                 <div>
-                  <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block font-semibold text-xs text-slate-700 mb-1">
                     Priority
                   </label>
                   <select
                     value={updateForm.priority}
                     onChange={(e) => setUpdateForm({ ...updateForm, priority: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium"
                   >
                     <option value="LOW">LOW</option>
                     <option value="MEDIUM">MEDIUM</option>
@@ -1147,13 +1161,13 @@ export default function ComplaintsPage() {
 
               {/* Assign Staff */}
               <div>
-                <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block font-semibold text-xs text-slate-700 mb-1">
                   Assign Staff Technician
                 </label>
                 <select
                   value={updateForm.assignedTo}
                   onChange={(e) => setUpdateForm({ ...updateForm, assignedTo: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium"
                 >
                   <option value="">-- Unassigned --</option>
                   {stats?.staff_list?.map((s) => (
@@ -1166,8 +1180,8 @@ export default function ComplaintsPage() {
 
               {/* Remarks / Resolution Notes */}
               <div>
-                <label className="block font-medium text-slate-700 dark:text-slate-300 mb-1">
-                  Maintenance Remarks / Resolution Note *
+                <label className="block font-semibold text-xs text-slate-700 mb-1">
+                  Maintenance Remarks / Resolution Note <span className="text-rose-500">*</span>
                 </label>
                 <textarea
                   rows="3"
@@ -1175,23 +1189,23 @@ export default function ComplaintsPage() {
                   value={updateForm.remarks}
                   onChange={(e) => setUpdateForm({ ...updateForm, remarks: e.target.value })}
                   placeholder="e.g. Electrician dispatched; wire replaced and socket tested."
-                  className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-900 dark:text-white resize-none"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 resize-none focus:outline-none focus:ring-2 focus:ring-emerald-500 placeholder:text-slate-400"
                 />
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setUpdateModalOpen(false)}
-                  className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                  className="px-4 py-2 rounded-xl text-slate-500 hover:text-slate-800 font-medium transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={updateSubmitting}
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-semibold shadow-md transition"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-semibold shadow-lg shadow-emerald-900/20 transition"
                 >
                   {updateSubmitting ? (
                     <>

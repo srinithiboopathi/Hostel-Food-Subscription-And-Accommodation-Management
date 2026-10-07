@@ -40,7 +40,7 @@ export default function Navbar({ toggleSidebar }) {
         {/* User Info & Role Badge */}
         {user && (
           <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200 py-1.5 px-3 rounded-xl">
-            <div className="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-xs">
+            <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">
               {user.name?.charAt(0) || 'U'}
             </div>
             <div className="hidden sm:block text-left">
