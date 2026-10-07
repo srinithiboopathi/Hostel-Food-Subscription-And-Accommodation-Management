@@ -31,8 +31,10 @@ export default {
         sans: ['Inter', 'Plus Jakarta Sans', 'system-ui', '-apple-system', 'sans-serif'],
       },
       boxShadow: {
+        'xs': '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
         'subtle': '0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04)',
         'card': '0 4px 20px -2px rgba(16, 185, 129, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04)',
+        'card-hover': '0 10px 25px -3px rgba(16, 185, 129, 0.12), 0 4px 10px -2px rgba(0, 0, 0, 0.05)',
         'glow-emerald': '0 0 25px -5px rgba(16, 185, 129, 0.35)',
         'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
       }
