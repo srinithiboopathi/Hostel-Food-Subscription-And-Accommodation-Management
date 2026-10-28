@@ -482,9 +482,44 @@ async function updateNotificationPreferences(userId, prefs = {}) {
   return await getNotificationPreferences(userId);
 }
 
+async function sendDirectNotification({
+  studentId,
+  userId,
+  title,
+  message,
+  type = 'NOTICE',
+  link = null,
+}) {
+  let targetUserId = userId;
+  if (!targetUserId && studentId) {
+    const [rows] = await query('SELECT user_id FROM students WHERE id = ?', [studentId]);
+    if (!rows || rows.length === 0) {
+      const err = new Error('Student record not found');
+      err.statusCode = 404;
+      throw err;
+    }
+    targetUserId = rows[0].user_id;
+  }
+
+  if (!targetUserId) {
+    const err = new Error('Target student or user ID is required');
+    err.statusCode = 400;
+    throw err;
+  }
+
+  return await createNotification({
+    userId: targetUserId,
+    title,
+    message,
+    type,
+    link,
+  });
+}
+
 module.exports = {
   createNotification,
   broadcastNotification,
+  sendDirectNotification,
   getUserNotifications,
   getUnreadNotifications,
   getUnreadCount,

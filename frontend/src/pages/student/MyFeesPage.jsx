@@ -56,23 +56,22 @@ export default function MyFeesPage() {
     try {
       // 1. Fetch Student Fees
       const feesRes = await getStudentFees({ status: statusFilter, limit: 100 });
-      if (feesRes.data?.data) {
-        setFees(feesRes.data.data);
-      }
+      const feesList = Array.isArray(feesRes?.data) ? feesRes.data : (feesRes?.data?.data || feesRes || []);
+      setFees(feesList);
 
       // 2. Fetch Student Payments
       const payRes = await getAllPayments({ limit: 100 });
-      if (payRes.data?.data) {
-        setPayments(payRes.data.data);
-      }
+      const payList = Array.isArray(payRes?.data) ? payRes.data : (payRes?.data?.data || payRes || []);
+      setPayments(payList);
 
       // 3. If student has studentId in user or we can fetch summary
       if (user?.studentId) {
         setSummaryLoading(true);
         try {
           const sumRes = await getStudentFeeSummary(user.studentId);
-          if (sumRes.data?.data) {
-            setSummary(sumRes.data.data);
+          const sumData = sumRes?.data?.data || sumRes?.data || sumRes;
+          if (sumData) {
+            setSummary(sumData);
           }
         } catch (sumErr) {
           console.error('Failed to load student summary:', sumErr);
@@ -81,7 +80,7 @@ export default function MyFeesPage() {
         }
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to fetch personal fee details');
+      setError(err.response?.data?.message || err.message || 'Failed to fetch personal fee details');
     } finally {
       setLoading(false);
     }
@@ -97,8 +96,9 @@ export default function MyFeesPage() {
     setReceiptModalOpen(true);
     try {
       const res = await getPaymentById(paymentId);
-      if (res.data?.data) {
-        setReceiptData(res.data.data);
+      const recData = res?.data?.data || res?.data || res;
+      if (recData) {
+        setReceiptData(recData);
       }
     } catch (err) {
       console.error('Failed to load receipt:', err);

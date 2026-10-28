@@ -24,6 +24,13 @@ router.post(
   notificationController.broadcastAnnouncement
 );
 
+// Send Direct Notification to Specific Student or User (ADMIN, WARDEN)
+router.post(
+  '/send-direct',
+  authorizeRoles('ADMIN', 'WARDEN'),
+  notificationController.sendDirectNotification
+);
+
 // Mark all as read (Supports both PATCH and PUT)
 router.patch('/read-all', notificationController.markAllAsRead);
 router.put('/read-all', notificationController.markAllAsRead);

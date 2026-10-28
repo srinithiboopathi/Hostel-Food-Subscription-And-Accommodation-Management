@@ -126,7 +126,10 @@ export default function ComplaintsPage() {
   useEffect(() => {
     if (canManage) {
       getStudents({ limit: 100, status: 'ACTIVE' })
-        .then((res) => setStudents(res.data?.data || []))
+        .then((res) => {
+          const list = Array.isArray(res?.data) ? res.data : (res?.data?.data || res || []);
+          setStudents(list);
+        })
         .catch((err) => console.error('Failed to load students:', err));
     }
   }, [canManage]);
@@ -136,8 +139,9 @@ export default function ComplaintsPage() {
     setStatsLoading(true);
     try {
       const res = await getComplaintStatistics();
-      if (res.data?.data) {
-        setStats(res.data.data);
+      const statsData = res?.data?.data || res?.data || res;
+      if (statsData) {
+        setStats(statsData);
       }
     } catch (err) {
       console.error('Failed to load stats:', err);
@@ -165,14 +169,14 @@ export default function ComplaintsPage() {
         priority: priorityFilter,
       });
 
-      if (res.data?.data) {
-        setComplaints(res.data.data);
-        if (res.data.pagination) {
-          setPagination(res.data.pagination);
-        }
+      const list = Array.isArray(res?.data) ? res.data : (res?.data?.data || res || []);
+      const paging = res?.pagination || res?.data?.pagination || null;
+      setComplaints(list);
+      if (paging) {
+        setPagination(paging);
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to fetch complaints');
+      setError(err.response?.data?.message || err.message || 'Failed to fetch complaints');
     } finally {
       setLoading(false);
     }
@@ -841,7 +845,7 @@ export default function ComplaintsPage() {
               {!isStudent && (
                 <div>
                   <label className="block font-semibold text-xs text-slate-700 mb-1">
-                    Student Resident <span className="text-rose-500">*</span>
+                    Select Resident / Tenant <span className="text-rose-500">*</span>
                   </label>
                   <select
                     required
@@ -849,12 +853,17 @@ export default function ComplaintsPage() {
                     onChange={(e) => setCreateForm({ ...createForm, studentId: e.target.value })}
                     className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-medium"
                   >
-                    <option value="">-- Choose Student --</option>
-                    {students.map((st) => (
-                      <option key={st.id} value={st.id}>
-                        {st.student_name} ({st.roll_number})
-                      </option>
-                    ))}
+                    <option value="">-- Choose Resident / Guest --</option>
+                    {students.map((st) => {
+                      const name = st.name || st.full_name || st.student_name || 'Resident';
+                      const rollTag = st.roll_number || `ID: ${st.id}`;
+                      const roomTag = st.room_number ? ` • Room ${st.room_number}` : '';
+                      return (
+                        <option key={st.id} value={st.id}>
+                          {name} ({rollTag}){roomTag}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
               )}

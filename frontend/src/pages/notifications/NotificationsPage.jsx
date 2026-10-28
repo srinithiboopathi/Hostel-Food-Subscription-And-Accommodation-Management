@@ -10,7 +10,9 @@ import {
   getNotificationPreferences,
   updateNotificationPreferences,
   broadcastAnnouncement,
+  sendDirectNotification,
 } from '../../services/notificationService';
+import { getStudents } from '../../services/studentService';
 import {
   Bell,
   CheckCircle2,
@@ -82,13 +84,28 @@ export default function NotificationsPage() {
   // Broadcast Modal State (Admin / Warden)
   const [showBroadcastModal, setShowBroadcastModal] = useState(false);
   const [broadcastLoading, setBroadcastLoading] = useState(false);
+  const [studentList, setStudentList] = useState([]);
   const [broadcastData, setBroadcastData] = useState({
     title: '',
     message: '',
     type: 'SYSTEM',
     targetRole: 'ALL',
+    targetStudentId: '',
     link: '',
   });
+
+  // Load students for direct targeted announcement
+  useEffect(() => {
+    if (showBroadcastModal && studentList.length === 0) {
+      getStudents({ limit: 100 })
+        .then((res) => {
+          if (res.data?.data || res.data) {
+            setStudentList(res.data?.data || res.data || []);
+          }
+        })
+        .catch(() => {});
+    }
+  }, [showBroadcastModal, studentList.length]);
 
   // Fetch Notifications
   const fetchNotificationsData = async (page = 1) => {
@@ -232,10 +249,26 @@ export default function NotificationsPage() {
     if (!broadcastData.title || !broadcastData.message) return;
     try {
       setBroadcastLoading(true);
-      await broadcastAnnouncement(broadcastData);
-      setSuccessMessage('Announcement broadcasted successfully to targeted users.');
+      if (broadcastData.targetRole === 'SPECIFIC_STUDENT') {
+        if (!broadcastData.targetStudentId) {
+          setError('Please select a student to send the notification to.');
+          setBroadcastLoading(false);
+          return;
+        }
+        await sendDirectNotification({
+          studentId: broadcastData.targetStudentId,
+          title: broadcastData.title,
+          message: broadcastData.message,
+          type: broadcastData.type || 'SYSTEM',
+          link: broadcastData.link || null,
+        });
+        setSuccessMessage('Direct notification successfully pushed to selected student.');
+      } else {
+        await broadcastAnnouncement(broadcastData);
+        setSuccessMessage('Announcement broadcasted successfully to targeted users.');
+      }
       setShowBroadcastModal(false);
-      setBroadcastData({ title: '', message: '', type: 'SYSTEM', targetRole: 'ALL', link: '' });
+      setBroadcastData({ title: '', message: '', type: 'SYSTEM', targetRole: 'ALL', targetStudentId: '', link: '' });
       fetchNotificationsData(1);
       setTimeout(() => setSuccessMessage(null), 3000);
     } catch (err) {
@@ -724,12 +757,32 @@ export default function NotificationsPage() {
                   className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-slate-200 focus:outline-hidden focus:border-purple-500"
                 >
                   <option value="ALL">All Active Users (Campus-wide)</option>
+                  <option value="SPECIFIC_STUDENT">Specific Student (Select by Name)</option>
                   <option value="STUDENT">All Students Only</option>
                   <option value="WARDEN">All Wardens</option>
                   <option value="MESS_MANAGER">Mess Managers</option>
                   <option value="ACCOUNTANT">Accountants</option>
                 </select>
               </div>
+
+              {broadcastData.targetRole === 'SPECIFIC_STUDENT' && (
+                <div className="animate-in fade-in">
+                  <label className="block font-semibold text-slate-300 mb-1">Select Student *</label>
+                  <select
+                    required
+                    value={broadcastData.targetStudentId || ''}
+                    onChange={(e) => setBroadcastData({ ...broadcastData, targetStudentId: e.target.value })}
+                    className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-xl text-slate-200 focus:outline-hidden focus:border-purple-500 text-xs"
+                  >
+                    <option value="">-- Choose Student by Name / Roll Number --</option>
+                    {studentList.map((st) => (
+                      <option key={st.id} value={st.id}>
+                        {st.name} ({st.roll_number}) — {st.department}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
 
               <div>
                 <label className="block font-semibold text-slate-300 mb-1">Announcement Title *</label>

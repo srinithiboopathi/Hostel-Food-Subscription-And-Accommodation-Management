@@ -4,9 +4,6 @@
 -- Designed for: Admin, Warden, Mess Manager, Accountant, Student
 -- =============================================================================
 
-CREATE DATABASE IF NOT EXISTS hostel_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE hostel_db;
-
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- -----------------------------------------------------------------------------

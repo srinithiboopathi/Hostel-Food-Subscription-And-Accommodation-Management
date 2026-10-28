@@ -10,7 +10,7 @@ const { validate } = require('../middleware/validationMiddleware');
 router.get(
   '/',
   authenticate,
-  authorizeRoles('ADMIN', 'WARDEN', 'MESS_MANAGER', 'ACCOUNTANT', 'STUDENT'),
+  authorizeRoles('ADMIN', 'WARDEN', 'MESS_MANAGER', 'ACCOUNTANT'),
   roomController.getAllRooms
 );
 
@@ -18,7 +18,7 @@ router.get(
 router.get(
   '/:id',
   authenticate,
-  authorizeRoles('ADMIN', 'WARDEN', 'MESS_MANAGER', 'ACCOUNTANT', 'STUDENT'),
+  authorizeRoles('ADMIN', 'WARDEN', 'MESS_MANAGER', 'ACCOUNTANT'),
   [
     param('id').isInt({ min: 1 }).withMessage('Room ID must be a positive integer'),
     validate,

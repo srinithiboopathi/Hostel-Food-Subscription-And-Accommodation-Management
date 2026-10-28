@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import {
   GraduationCap,
   Building2,
-  BedDouble,
   Receipt,
   Utensils,
   AlertTriangle,
@@ -73,7 +72,6 @@ export default function StudentDashboard() {
   const hostel = accommodation.hostel;
   const room = accommodation.room;
   const allocation = accommodation.allocation;
-  const roommates = accommodation.roommates || [];
 
   const fees = data?.fees || {};
   const meals = data?.meals || {};
@@ -234,29 +232,6 @@ export default function StudentDashboard() {
           onClick={() => navigate('/visitors')}
         />
       </div>
-
-      {/* Roommates & Living Details */}
-      {roommates.length > 0 && (
-        <div className="p-5 rounded-3xl bg-white border border-slate-200/80 shadow-xs">
-          <h3 className="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
-            <BedDouble className="w-4 h-4 text-emerald-600" />
-            <span>My Roommates (Room {room?.room_number})</span>
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-            {roommates.map((rm) => (
-              <div key={rm.id} className="p-3 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center justify-center font-bold text-xs">
-                  {rm.full_name?.charAt(0)}
-                </div>
-                <div>
-                  <p className="text-xs font-semibold text-slate-900">{rm.full_name}</p>
-                  <p className="text-[10px] text-slate-500 font-mono">{rm.roll_number} • {rm.department}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Food Subscription & Dining Status */}
       <div className="p-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-4">

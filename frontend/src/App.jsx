@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import LoginPage from './pages/auth/LoginPage';
+import StudentLoginPage from './pages/auth/StudentLoginPage';
+import RegisterStudentPage from './pages/auth/RegisterStudentPage';
 import DashboardLayout from './components/layout/DashboardLayout';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import AdminDashboard from './pages/dashboard/AdminDashboard';
@@ -28,14 +30,20 @@ import ReportsPage from './pages/reports/ReportsPage';
 import ProfilePage from './pages/profile/ProfilePage';
 import StaffPage from './pages/staff/StaffPage';
 import VisitorsPage from './pages/visitors/VisitorsPage';
+import HomePage from './pages/HomePage';
 
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          {/* Public Authentication Route */}
+          {/* Public Authentication Routes */}
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/student-login" element={<StudentLoginPage />} />
+          <Route path="/student/login" element={<StudentLoginPage />} />
+          <Route path="/student-register" element={<RegisterStudentPage />} />
+          <Route path="/register-student" element={<RegisterStudentPage />} />
 
           {/* Core Master Dashboard Route (Dynamic Role Resolution) */}
           <Route
@@ -45,7 +53,6 @@ export default function App() {
               />
             }
           >
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/notifications" element={<NotificationsPage />} />
@@ -71,7 +78,7 @@ export default function App() {
             <Route path="/dashboard/accountant" element={<AccountantDashboard />} />
           </Route>
 
-          <Route element={<DashboardLayout allowedRoles={['STUDENT']} />}>
+          <Route element={<DashboardLayout allowedRoles={['ADMIN', 'STUDENT']} />}>
             <Route path="/dashboard/student" element={<StudentDashboard />} />
           </Route>
 
@@ -85,11 +92,14 @@ export default function App() {
           >
             <Route path="/accommodation" element={<Navigate to="/hostels" replace />} />
             <Route path="/hostels" element={<HostelsPage />} />
-            <Route path="/rooms" element={<RoomsPage />} />
             <Route path="/allocations" element={<AllocationsPage />} />
             <Route path="/menu" element={<MenuPage />} />
             <Route path="/complaints" element={<ComplaintsPage />} />
             <Route path="/visitors" element={<VisitorsPage />} />
+          </Route>
+
+          <Route element={<DashboardLayout allowedRoles={['ADMIN', 'WARDEN']} />}>
+            <Route path="/rooms" element={<RoomsPage />} />
           </Route>
 
           {/* Student Access: Personal Leaves, Meal History & Personal Fees */}

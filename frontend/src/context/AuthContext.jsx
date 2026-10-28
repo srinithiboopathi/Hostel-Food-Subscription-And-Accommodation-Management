@@ -36,8 +36,12 @@ export function AuthProvider({ children }) {
     verifyAuth();
   }, [token]);
 
-  const login = async (email, password) => {
-    const res = await axiosClient.post('/auth/login', { email, password });
+  const login = async (identifier, password) => {
+    const res = await axiosClient.post('/auth/login', {
+      email: identifier,
+      identifier: identifier,
+      password,
+    });
     if (res.success && res.data?.token) {
       localStorage.setItem('hostel_token', res.data.token);
       setToken(res.data.token);
@@ -45,6 +49,50 @@ export function AuthProvider({ children }) {
       return res.data;
     }
     throw new Error(res.message || 'Login failed');
+  };
+
+  const loginStaff = async (email, password) => {
+    const res = await axiosClient.post('/auth/staff-login', {
+      email,
+      password,
+    });
+    const staffRoles = ['ADMIN', 'WARDEN', 'MESS_MANAGER', 'ACCOUNTANT'];
+    if (res.success && res.data?.token && staffRoles.includes(res.data.user?.role)) {
+      localStorage.setItem('hostel_token', res.data.token);
+      setToken(res.data.token);
+      setUser(res.data.user);
+      return res.data;
+    }
+    throw new Error(res.message || 'Staff sign in failed');
+  };
+
+  const loginStudent = async (identifier, password) => {
+    const res = await axiosClient.post('/auth/student-login', {
+      identifier,
+      password,
+    });
+    if (res.success && res.data?.token && res.data.user?.role === 'STUDENT') {
+      localStorage.setItem('hostel_token', res.data.token);
+      setToken(res.data.token);
+      setUser(res.data.user);
+      return res.data;
+    }
+    throw new Error(res.message || 'Student sign in failed');
+  };
+
+  const registerStudent = async (studentData) => {
+    try {
+      const res = await axiosClient.post('/auth/register-student', studentData);
+      if (res.success && res.data?.token) {
+        localStorage.setItem('hostel_token', res.data.token);
+        setToken(res.data.token);
+        setUser(res.data.user || res.data);
+        return { success: true, data: res.data };
+      }
+      return { success: false, error: res.message || 'Registration failed' };
+    } catch (err) {
+      return { success: false, error: err.message || 'Registration failed' };
+    }
   };
 
   const logout = () => {
@@ -64,6 +112,9 @@ export function AuthProvider({ children }) {
         isLoading: loading,
         isAuthenticated: !!user,
         login,
+        loginStaff,
+        loginStudent,
+        registerStudent,
         logout,
       }}
     >

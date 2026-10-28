@@ -120,20 +120,20 @@ export default function FeesPage() {
   const [selectedFeeDetails, setSelectedFeeDetails] = useState(null);
   const [loadingDetails, setLoadingDetails] = useState(false);
 
-  // Fetch Fee Types & Students for dropdowns
+  // Fetch Fee Types & Students for dropdowns (works for Hostels & Outside PGs)
   useEffect(() => {
     async function loadMeta() {
       try {
         const [ftRes, stRes] = await Promise.all([
           getFeeTypes(),
-          getStudents({ limit: 100, status: 'ACTIVE' }),
+          getStudents({ limit: 200, status: 'ACTIVE' }),
         ]);
-        if (ftRes.data?.data) {
-          setFeeTypes(ftRes.data.data);
-        }
-        if (stRes.data?.data) {
-          setStudents(stRes.data.data);
-        }
+
+        const rawFeeTypes = ftRes?.data || ftRes || [];
+        setFeeTypes(Array.isArray(rawFeeTypes) ? rawFeeTypes : rawFeeTypes.data || []);
+
+        const rawStudents = stRes?.data || stRes || [];
+        setStudents(Array.isArray(rawStudents) ? rawStudents : rawStudents.data || []);
       } catch (err) {
         console.error('Failed to load fee meta:', err);
       }
@@ -146,8 +146,9 @@ export default function FeesPage() {
     setStatsLoading(true);
     try {
       const res = await getFinancialStatistics();
-      if (res.data?.data) {
-        setStats(res.data.data);
+      const statsObj = res?.data || res;
+      if (statsObj) {
+        setStats(statsObj.data || statsObj);
       }
     } catch (err) {
       console.error('Failed to load stats:', err);
@@ -160,7 +161,7 @@ export default function FeesPage() {
     loadStatistics();
   }, []);
 
-  // Fetch Student Fees Table
+  // Fetch Student / Resident Fees Table
   const fetchFees = async (page = 1) => {
     setLoading(true);
     setError(null);
@@ -174,14 +175,21 @@ export default function FeesPage() {
         academicYear: academicYearFilter,
       });
 
-      if (res.data?.data) {
-        setFees(res.data.data);
-        if (res.data.pagination) {
-          setPagination(res.data.pagination);
-        }
+      const feesData = res?.data || res;
+      if (Array.isArray(feesData)) {
+        setFees(feesData);
+      } else if (feesData?.data && Array.isArray(feesData.data)) {
+        setFees(feesData.data);
+      } else {
+        setFees([]);
+      }
+
+      const pag = res?.pagination || res?.data?.pagination;
+      if (pag) {
+        setPagination(pag);
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to fetch student fees');
+      setError(err.response?.data?.message || err.message || 'Failed to fetch fee invoices');
     } finally {
       setLoading(false);
     }
@@ -819,72 +827,94 @@ export default function FeesPage() {
             )}
 
             <form onSubmit={handleCreateFeeSubmit} className="mt-4 space-y-4 text-sm">
-              {/* Select Student */}
+              {/* Select Resident / Tenant */}
               <div>
                 <label className="block font-medium text-slate-700 mb-1">
-                  Select Student Resident *
+                  Select Resident / Tenant *
                 </label>
                 <select
                   required
                   value={createForm.studentId}
-                  onChange={(e) => setCreateForm({ ...createForm, studentId: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                  onChange={(e) => {
+                    const stId = e.target.value;
+                    const found = students.find((s) => s.id.toString() === stId);
+                    setCreateForm({
+                      ...createForm,
+                      studentId: stId,
+                      amountDue: createForm.amountDue || (found?.base_rent ? found.base_rent.toString() : ''),
+                    });
+                  }}
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
                 >
-                  <option value="">-- Choose Student --</option>
-                  {students.map((st) => (
-                    <option key={st.id} value={st.id}>
-                      {st.student_name} ({st.roll_number}) - {st.department || 'Student'}
-                    </option>
-                  ))}
+                  <option value="">-- Choose Resident / PG Tenant --</option>
+                  {students.map((st) => {
+                    const displayName = st.name || st.full_name || st.student_name || 'Resident';
+                    const idCode = st.roll_number || st.rollNumber || `ID: ${st.id}`;
+                    const roomTag = st.room_number ? ` • Room ${st.room_number}` : '';
+                    return (
+                      <option key={st.id} value={st.id}>
+                        {displayName} ({idCode}){roomTag}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
 
-              {/* Fee Type */}
+              {/* Fee Category */}
               <div>
                 <label className="block font-medium text-slate-700 mb-1">
-                  Fee Category / Type *
+                  Fee / Rent Category *
                 </label>
                 <select
                   required
                   value={createForm.feeTypeId}
                   onChange={(e) => setCreateForm({ ...createForm, feeTypeId: e.target.value })}
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
                 >
-                  <option value="">-- Choose Fee Type --</option>
-                  {feeTypes.map((ft) => (
-                    <option key={ft.id} value={ft.id}>
-                      {ft.name} ({ft.frequency})
-                    </option>
-                  ))}
+                  <option value="">-- Choose Fee / Rent Category --</option>
+                  {feeTypes.map((ft) => {
+                    const labelMap = {
+                      HOSTEL_RENT: 'Room Rent / PG Accommodation',
+                      MESS_CHARGES: 'Mess & Food Subscription',
+                      MAINTENANCE_FEE: 'Maintenance & Utility Bills (Electricity/Wi-Fi)',
+                      SECURITY_DEPOSIT: 'Caution / Security Deposit (Refundable)',
+                    };
+                    const displayName = labelMap[ft.name] || ft.name.replace(/_/g, ' ');
+                    return (
+                      <option key={ft.id} value={ft.id}>
+                        {displayName} ({ft.frequency})
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
 
-              {/* Academic Year & Term */}
+              {/* Billing Period & Description */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block font-medium text-slate-700 mb-1">
-                    Academic Year
+                    Billing Period / Month
                   </label>
                   <input
                     type="text"
                     required
                     value={createForm.academicYear}
                     onChange={(e) => setCreateForm({ ...createForm, academicYear: e.target.value })}
-                    placeholder="2026-2027"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                    placeholder="e.g. Nov 2026 or 2026-2027"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
                   />
                 </div>
                 <div>
                   <label className="block font-medium text-slate-700 mb-1">
-                    Term / Semester
+                    Billing Cycle / Description
                   </label>
                   <input
                     type="text"
                     required
                     value={createForm.termName}
                     onChange={(e) => setCreateForm({ ...createForm, termName: e.target.value })}
-                    placeholder="Odd Semester 2026"
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                    placeholder="e.g. Monthly Rent, Deposit, Sem 1"
+                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
                   />
                 </div>
               </div>

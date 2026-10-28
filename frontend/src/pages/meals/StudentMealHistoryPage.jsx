@@ -51,14 +51,15 @@ export default function StudentMealHistoryPage() {
         getTodayMenu(),
       ]);
 
-      const hData = historyRes.data?.data || [];
-      const gData = historyRes.data?.grouped_by_date || [];
-      const pData = historyRes.data?.pagination || { page: 1, limit: 30, total: 0, totalPages: 1 };
+      const rawHistory = historyRes?.data || historyRes;
+      const hData = Array.isArray(rawHistory) ? rawHistory : (rawHistory?.data || []);
+      const gData = rawHistory?.grouped_by_date || historyRes?.grouped_by_date || [];
+      const pData = historyRes?.pagination || rawHistory?.pagination || { page: 1, limit: 30, total: 0, totalPages: 1 };
 
       setHistoryRecords(hData);
       setGroupedDates(gData);
       setPagination(pData);
-      setTodayMenu(menuRes.data?.data || menuRes.data);
+      setTodayMenu(menuRes?.data?.data || menuRes?.data || menuRes);
     } catch (err) {
       console.error('Failed to fetch student meal history:', err);
       setError(err.response?.data?.message || 'Failed to load personal dining records');

@@ -69,3 +69,10 @@ export async function updateNotificationPreferences(preferences) {
 export async function broadcastAnnouncement(data) {
   return await axiosClient.post('/notifications/broadcast', data);
 }
+
+/**
+ * Send a direct notification to a specific student or user (Admin, Warden)
+ */
+export async function sendDirectNotification(data) {
+  return await axiosClient.post('/notifications/send-direct', data);
+}

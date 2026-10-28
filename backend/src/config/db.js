@@ -8,7 +8,7 @@ const pool = mysql.createPool({
   port: parseInt(process.env.DB_PORT, 10) || 3306,
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'hostel_db',
+  database: process.env.DB_NAME || 'hostel_management',
   waitForConnections: true,
   connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT, 10) || 10,
   queueLimit: 0,
@@ -19,7 +19,7 @@ const pool = mysql.createPool({
 async function testConnection() {
   try {
     const connection = await pool.getConnection();
-    console.log(`[Database] MySQL Connection established with database '${process.env.DB_NAME || 'hostel_db'}'`);
+    console.log(`[Database] MySQL Connection established with database '${process.env.DB_NAME || 'hostel_management'}'`);
     connection.release();
     return true;
   } catch (error) {

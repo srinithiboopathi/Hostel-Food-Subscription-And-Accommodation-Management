@@ -13,13 +13,16 @@ import {
   Home,
   Shield,
   ArrowRight,
+  CheckCircle2,
+  AlertCircle,
+  Loader2
 } from 'lucide-react';
 
 export default function RegisterStudentPage() {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
-    password: 'Password@123',
+    password: '',
     phone: '',
     rollNumber: '',
     department: 'Computer Science & Engineering',
@@ -53,41 +56,46 @@ export default function RegisterStudentPage() {
     setSubmitting(false);
 
     if (res.success) {
-      navigate('/dashboard', { replace: true });
+      navigate('/dashboard/student', { replace: true });
     } else {
       setErrorMessage(res.error || 'Registration failed');
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#090d16] py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#f8faf9] py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
+        {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 mb-3">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white shadow-md shadow-emerald-600/30 mb-3">
             <GraduationCap className="w-6 h-6" />
           </div>
-          <h2 className="text-2xl font-bold text-white">Student Hostel Registration</h2>
-          <p className="text-sm text-slate-400 mt-1">
-            Fill in your academic and guardian details to enroll in the Hostel Accommodation system.
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Student Hostel Registration
+          </h2>
+          <p className="text-sm text-slate-500 mt-1 max-w-lg mx-auto">
+            Create your resident student profile to access room allocation, mess plans, meal attendance, and gate outpass.
           </p>
         </div>
 
-        <div className="glass-card p-6 sm:p-8">
+        {/* Card */}
+        <div className="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-10 shadow-sm shadow-slate-200/50">
           {errorMessage && (
-            <div className="mb-6 p-3.5 bg-rose-500/10 border border-rose-500/30 rounded-xl text-rose-300 text-xs">
-              {errorMessage}
+            <div className="mb-6 p-4 bg-rose-50 border border-rose-200 rounded-xl text-rose-700 text-xs flex items-center gap-2.5">
+              <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
+              <span className="font-medium">{errorMessage}</span>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Section 1: Academic & Account */}
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Section 1: Academic & User Account Information */}
             <div>
-              <h3 className="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-                <User className="w-4 h-4" /> 1. Academic & User Account Information
+              <h3 className="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <User className="w-4 h-4 text-emerald-600" /> 1. Academic & Student Information
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Full Name *</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Full Name *</label>
                   <input
                     type="text"
                     name="fullName"
@@ -100,7 +108,7 @@ export default function RegisterStudentPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Roll Number (Unique) *</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Roll Number (Unique ID) *</label>
                   <input
                     type="text"
                     name="rollNumber"
@@ -108,12 +116,13 @@ export default function RegisterStudentPage() {
                     value={formData.rollNumber}
                     onChange={handleChange}
                     placeholder="e.g. CS2025099"
-                    className="input-field font-mono"
+                    className="input-field font-mono uppercase"
                   />
+                  <span className="text-[10px] text-slate-400 mt-0.5 block">You will use this Roll Number to sign in.</span>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">College Email Address *</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">College Email Address *</label>
                   <input
                     type="email"
                     name="email"
@@ -126,7 +135,7 @@ export default function RegisterStudentPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Mobile Number</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Mobile Number</label>
                   <input
                     type="tel"
                     name="phone"
@@ -138,12 +147,12 @@ export default function RegisterStudentPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Department</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Department</label>
                   <select
                     name="department"
                     value={formData.department}
                     onChange={handleChange}
-                    className="input-field"
+                    className="input-field cursor-pointer"
                   >
                     <option value="Computer Science & Engineering">Computer Science & Engineering</option>
                     <option value="Electronics & Communication">Electronics & Communication</option>
@@ -154,7 +163,7 @@ export default function RegisterStudentPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Course & Year</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Course & Year of Study</label>
                   <div className="grid grid-cols-2 gap-2">
                     <input
                       type="text"
@@ -168,7 +177,7 @@ export default function RegisterStudentPage() {
                       name="yearOfStudy"
                       value={formData.yearOfStudy}
                       onChange={handleChange}
-                      className="input-field"
+                      className="input-field cursor-pointer"
                     >
                       <option value={1}>1st Year</option>
                       <option value={2}>2nd Year</option>
@@ -179,12 +188,12 @@ export default function RegisterStudentPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Gender</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Gender</label>
                   <select
                     name="gender"
                     value={formData.gender}
                     onChange={handleChange}
-                    className="input-field"
+                    className="input-field cursor-pointer"
                   >
                     <option value="MALE">Male</option>
                     <option value="FEMALE">Female</option>
@@ -193,7 +202,7 @@ export default function RegisterStudentPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Blood Group</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Blood Group</label>
                   <input
                     type="text"
                     name="bloodGroup"
@@ -207,13 +216,13 @@ export default function RegisterStudentPage() {
             </div>
 
             {/* Section 2: Guardian Details */}
-            <div className="pt-4 border-t border-slate-800">
-              <h3 className="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-                <Shield className="w-4 h-4" /> 2. Guardian & Emergency Contact
+            <div className="pt-6 border-t border-slate-100">
+              <h3 className="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <Shield className="w-4 h-4 text-emerald-600" /> 2. Guardian & Emergency Contact
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Guardian Name *</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Guardian Name *</label>
                   <input
                     type="text"
                     name="guardianName"
@@ -225,7 +234,7 @@ export default function RegisterStudentPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Guardian Phone *</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Guardian Phone *</label>
                   <input
                     type="tel"
                     name="guardianPhone"
@@ -237,7 +246,7 @@ export default function RegisterStudentPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Relationship</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Relationship</label>
                   <input
                     type="text"
                     name="guardianRelation"
@@ -251,13 +260,13 @@ export default function RegisterStudentPage() {
             </div>
 
             {/* Section 3: Address & Password */}
-            <div className="pt-4 border-t border-slate-800">
-              <h3 className="text-sm font-bold text-indigo-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-                <Home className="w-4 h-4" /> 3. Residential Address & Security
+            <div className="pt-6 border-t border-slate-100">
+              <h3 className="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <Home className="w-4 h-4 text-emerald-600" /> 3. Residential Address & Security
               </h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Permanent Residential Address *</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Permanent Residential Address *</label>
                   <textarea
                     name="permanentAddress"
                     required
@@ -269,15 +278,17 @@ export default function RegisterStudentPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Account Password *</label>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Account Password *</label>
                   <input
                     type="password"
                     name="password"
                     required
+                    minLength={6}
                     value={formData.password}
                     onChange={handleChange}
                     className="input-field"
                   />
+                  <span className="text-[10px] text-slate-400 mt-0.5 block">Choose a private password with at least 6 characters.</span>
                 </div>
               </div>
             </div>
@@ -286,17 +297,27 @@ export default function RegisterStudentPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="btn-primary w-full py-3 text-base"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold text-sm shadow-md shadow-emerald-600/20 transition-all duration-150 active:scale-[0.98] disabled:opacity-50 cursor-pointer"
               >
-                {submitting ? 'Registering...' : 'Complete Registration & Access Student Portal'}
+                {submitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Registering Student Account...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Complete Registration & Open Student Portal</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
               </button>
             </div>
           </form>
 
-          <div className="mt-6 text-center text-xs text-slate-400">
-            Already registered?{' '}
-            <Link to="/login" className="text-indigo-400 font-semibold hover:underline">
-              Sign In to Your Account
+          <div className="mt-6 pt-5 border-t border-slate-100 text-center text-xs text-slate-500">
+            Already have a student account?{' '}
+            <Link to="/student-login" className="text-emerald-600 font-semibold hover:text-emerald-700 hover:underline">
+              Sign In with Roll Number
             </Link>
           </div>
         </div>

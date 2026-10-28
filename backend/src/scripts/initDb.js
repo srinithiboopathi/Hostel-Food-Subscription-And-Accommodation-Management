@@ -14,7 +14,7 @@ async function initDatabase() {
   const port = parseInt(process.env.DB_PORT, 10) || 3306;
   const user = process.env.DB_USER || 'root';
   const password = process.env.DB_PASSWORD || '';
-  const dbName = process.env.DB_NAME || 'hostel_db';
+  const dbName = process.env.DB_NAME || 'hostel_management';
 
   let connection;
 

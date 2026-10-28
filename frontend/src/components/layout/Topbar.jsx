@@ -12,11 +12,8 @@ import {
   Bell,
   Search,
   ChevronDown,
-  Sparkles,
-  ShieldCheck,
   LogOut,
   User,
-  CheckCircle2,
   Calendar,
   MessageSquareWarning,
   CreditCard,
@@ -29,10 +26,9 @@ import {
 } from 'lucide-react';
 
 export default function Topbar({ onToggleSidebar }) {
-  const { user, role, logout, login } = useAuth();
+  const { user, role, logout } = useAuth();
   const navigate = useNavigate();
 
-  const [showRoleMenu, setShowRoleMenu] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showNotificationMenu, setShowNotificationMenu] = useState(false);
 
@@ -42,20 +38,6 @@ export default function Topbar({ onToggleSidebar }) {
   const [loadingNotifs, setLoadingNotifs] = useState(false);
 
   const notifRef = useRef(null);
-
-  // Quick Role Switching Demo Accounts
-  const demoAccounts = [
-    { role: 'ADMIN', name: 'System Admin', email: 'admin@hostel.edu', badge: 'bg-rose-50 text-rose-700 border border-rose-200' },
-    { role: 'WARDEN', name: 'Chief Warden', email: 'warden@hostel.edu', badge: 'bg-amber-50 text-amber-700 border border-amber-200' },
-    { role: 'MESS_MANAGER', name: 'Mess Manager', email: 'mess@hostel.edu', badge: 'bg-emerald-50 text-emerald-700 border border-emerald-200' },
-    { role: 'ACCOUNTANT', name: 'Chief Accountant', email: 'accounts@hostel.edu', badge: 'bg-teal-50 text-teal-700 border border-teal-200' },
-    { role: 'STUDENT', name: 'Aarav Patel (Student)', email: 'aarav.patel@student.edu', badge: 'bg-emerald-50 text-emerald-700 border border-emerald-200' },
-  ];
-
-  const handleQuickSwitch = async (account) => {
-    setShowRoleMenu(false);
-    await login(account.email, 'Password@123');
-  };
 
   // Poll for Unread Count every 20 seconds
   const fetchUnreadCount = async () => {
@@ -164,7 +146,7 @@ export default function Topbar({ onToggleSidebar }) {
   };
 
   return (
-    <header className="sticky top-0 z-30 h-16 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-4 lg:px-8 flex items-center justify-between gap-4 shadow-xs">
+    <header className="sticky top-0 z-30 h-16 bg-white/70 backdrop-blur-xl border-b border-white/70 px-4 lg:px-8 flex items-center justify-between gap-4 shadow-sm shadow-slate-900/5">
       {/* Left: Mobile Toggle & Search */}
       <div className="flex items-center gap-4 flex-1">
         <button
@@ -184,54 +166,8 @@ export default function Topbar({ onToggleSidebar }) {
         </div>
       </div>
 
-      {/* Right: Actions, Switcher, Notifications Bell, User */}
+      {/* Right: Notifications and user profile */}
       <div className="flex items-center gap-3">
-        {/* Quick Role Switcher Button */}
-        <div className="relative">
-          <button
-            onClick={() => setShowRoleMenu(!showRoleMenu)}
-            className="flex items-center gap-2 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100/70 border border-emerald-200 text-emerald-800 rounded-xl text-xs font-semibold transition-all duration-150 cursor-pointer"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-            <span className="hidden md:inline">Switch Role</span>
-            <ChevronDown className="w-3 h-3 text-emerald-600" />
-          </button>
-
-          {showRoleMenu && (
-            <div className="absolute right-0 mt-2 w-72 bg-white border border-slate-200 rounded-2xl shadow-xl p-2 z-50 animate-in fade-in zoom-in-95 duration-150">
-              <div className="p-2.5 border-b border-slate-100 mb-1">
-                <p className="text-xs font-bold text-slate-900">Live Role Switching</p>
-                <p className="text-[11px] text-slate-500">Instantly test different database personas</p>
-              </div>
-              <div className="space-y-1">
-                {demoAccounts.map((acc) => (
-                  <button
-                    key={acc.role}
-                    onClick={() => handleQuickSwitch(acc)}
-                    className={`w-full flex items-center justify-between p-2 rounded-xl text-left text-xs transition-colors cursor-pointer ${
-                      role === acc.role
-                        ? 'bg-emerald-50 border border-emerald-200 text-emerald-900 font-semibold'
-                        : 'hover:bg-slate-50 text-slate-700'
-                    }`}
-                  >
-                    <div>
-                      <p className="font-semibold">{acc.name}</p>
-                      <p className="text-[10px] text-slate-400">{acc.email}</p>
-                    </div>
-                    {role === acc.role ? (
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    ) : (
-                      <span className={`text-[9px] px-2 py-0.5 rounded-full font-medium ${acc.badge}`}>
-                        {acc.role}
-                      </span>
-                    )}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
         {/* Real-Time Notification Bell & Dropdown */}
         <div className="relative" ref={notifRef}>
           <button

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Building2, ShieldCheck, Mail, Lock, Loader2, AlertCircle, ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
+import { Building2, ShieldCheck, Mail, Lock, Loader2, AlertCircle, ArrowRight, CheckCircle2, Sparkles, GraduationCap } from 'lucide-react';
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { login } = useAuth();
+  const { loginStaff } = useAuth();
 
-  const [email, setEmail] = useState('admin@hostel.com');
-  const [password, setPassword] = useState('Password@123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -21,7 +21,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      await login(email, password);
+      await loginStaff(email, password);
       navigate(from, { replace: true });
     } catch (err) {
       setError(err.message || 'Invalid email or password');
@@ -30,14 +30,8 @@ export default function LoginPage() {
     }
   };
 
-  const setPersona = (userEmail, userPass) => {
-    setEmail(userEmail);
-    setPassword(userPass);
-    setError('');
-  };
-
   return (
-    <div className="min-h-screen bg-[#f8faf9] flex">
+    <div className="auth-shell min-h-screen flex">
       {/* LEFT SIDE: Visual Campus Banner */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-slate-900 flex-col justify-between p-12 text-white">
         <img
@@ -119,12 +113,31 @@ export default function LoginPage() {
               Welcome back
             </h2>
             <p className="text-sm text-slate-500 mt-1">
-              Please enter your credentials to access your portal.
+              Confidential access for authorized hostel staff.
             </p>
           </div>
 
           {/* Form Card */}
-          <div className="bg-white rounded-2xl border border-slate-200/80 p-8 shadow-sm shadow-slate-200/50">
+          <div className="glass-card rounded-2xl p-8">
+            {/* Student Switcher Banner */}
+            <div className="mb-6 p-3.5 bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200/80 rounded-2xl flex items-center justify-between gap-3 shadow-xs">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-sm shrink-0">
+                  <GraduationCap className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-slate-800">Student resident?</p>
+                  <p className="text-[11px] text-slate-500">Use your own student account to sign in</p>
+                </div>
+              </div>
+              <Link
+                to="/student-login"
+                className="shrink-0 text-xs font-bold text-emerald-700 hover:text-white bg-white hover:bg-emerald-600 px-3.5 py-1.5 rounded-xl border border-emerald-200 shadow-xs transition-all"
+              >
+                Student Portal →
+              </Link>
+            </div>
+
             {error && (
               <div className="mb-6 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2.5">
                 <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
@@ -144,7 +157,8 @@ export default function LoginPage() {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="admin@hostel.com"
+                    autoComplete="username"
+                    placeholder="Your staff email"
                     className="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all"
                   />
                 </div>
@@ -161,6 +175,7 @@ export default function LoginPage() {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    autoComplete="current-password"
                     placeholder="••••••••"
                     className="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-600 transition-all"
                   />
@@ -176,53 +191,16 @@ export default function LoginPage() {
                   <Loader2 className="w-4 h-4 animate-spin" />
                 ) : (
                   <>
-                    <span>Sign In to Dashboard</span>
+                    <span>Sign In to Staff Portal</span>
                     <ArrowRight className="w-4 h-4" />
                   </>
                 )}
               </button>
             </form>
 
-            {/* Quick Persona Logins */}
-            <div className="mt-8 pt-6 border-t border-slate-100">
-              <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-3 text-center">
-                One-Click Demo Personas
-              </p>
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={() => setPersona('admin@hostel.com', 'Password@123')}
-                  className="px-3 py-2 bg-slate-50 hover:bg-emerald-50 hover:border-emerald-200 border border-slate-200 text-xs font-semibold text-slate-700 hover:text-emerald-700 rounded-xl text-left transition-all duration-150 flex items-center gap-2"
-                >
-                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                  <span>Admin</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setPersona('warden@hostel.com', 'Password@123')}
-                  className="px-3 py-2 bg-slate-50 hover:bg-teal-50 hover:border-teal-200 border border-slate-200 text-xs font-semibold text-slate-700 hover:text-teal-700 rounded-xl text-left transition-all duration-150 flex items-center gap-2"
-                >
-                  <span className="w-2 h-2 rounded-full bg-teal-500" />
-                  <span>Warden</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setPersona('mess@hostel.com', 'Password@123')}
-                  className="px-3 py-2 bg-slate-50 hover:bg-amber-50 hover:border-amber-200 border border-slate-200 text-xs font-semibold text-slate-700 hover:text-amber-700 rounded-xl text-left transition-all duration-150 flex items-center gap-2"
-                >
-                  <span className="w-2 h-2 rounded-full bg-amber-500" />
-                  <span>Mess Mgr</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setPersona('student@hostel.com', 'Password@123')}
-                  className="px-3 py-2 bg-slate-50 hover:bg-emerald-50 hover:border-emerald-200 border border-slate-200 text-xs font-semibold text-slate-700 hover:text-emerald-700 rounded-xl text-left transition-all duration-150 flex items-center gap-2"
-                >
-                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                  <span>Student</span>
-                </button>
-              </div>
-            </div>
+            <p className="mt-6 text-center text-[11px] leading-5 text-slate-500">
+              Staff accounts are issued by your system administrator. Never share your password.
+            </p>
           </div>
         </div>
       </div>

@@ -32,11 +32,16 @@ DBMS Supported: **MySQL 8.0+ / MariaDB 10.4+**
 
 ### Prerequisites
 * MySQL Server (or XAMPP with MySQL running on port `3306`)
-* Node.js v18+ (optional for automated setup script)
+* Node.js v18+
 
 ---
 
 ### Execution Steps
-```powershell
-mysql -u root -e "SOURCE c:/Users/asus/OneDrive/Desktop/DBMS/hostel-management/database/schema.sql; SOURCE c:/Users/asus/OneDrive/Desktop/DBMS/hostel-management/database/sample_data.sql;"
+Configure `backend/.env` with the MySQL connection settings and `DB_NAME` (default: `hostel_management`), then run:
+
+```bash
+cd backend
+npm run db:init
 ```
+
+Initialization recreates the schema and loads the demo accounts; back up any existing data before running it.

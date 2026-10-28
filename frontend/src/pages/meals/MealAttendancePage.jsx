@@ -79,28 +79,41 @@ export default function MealAttendancePage() {
   });
 
   // Load Initial Metadata (Meal Types & Students)
-  useEffect(() => {
-    async function loadMeta() {
-      try {
-        const [typesRes, studentsRes] = await Promise.all([
-          getMealTypes(),
-          getStudents({ limit: 100, status: 'ACTIVE' }),
-        ]);
-        const types = typesRes.data?.data || typesRes.data || [];
-        const studentList = studentsRes.data?.data || studentsRes.data?.students || [];
-        setMealTypes(types);
-        setStudents(studentList);
+  const loadMeta = async () => {
+    try {
+      const [typesRes, studentsRes] = await Promise.all([
+        getMealTypes(),
+        getStudents({ limit: 200, status: 'ACTIVE' }),
+      ]);
 
-        if (types.length > 0) {
-          setFormData((prev) => ({ ...prev, mealTypeId: types[0].id }));
-        }
-        if (studentList.length > 0) {
-          setFormData((prev) => ({ ...prev, studentId: studentList[0].id }));
-        }
-      } catch (err) {
-        console.error('Failed to load metadata:', err);
+      const rawTypes = typesRes?.data || typesRes || [];
+      const types = Array.isArray(rawTypes) ? rawTypes : rawTypes.data || [];
+
+      const rawStudents = studentsRes?.data || studentsRes || [];
+      let studentList = Array.isArray(rawStudents) ? rawStudents : rawStudents.data || [];
+
+      // Fallback: if zero ACTIVE students returned, fetch all students
+      if (studentList.length === 0) {
+        const fallbackRes = await getStudents({ limit: 200 });
+        const rawFallback = fallbackRes?.data || fallbackRes || [];
+        studentList = Array.isArray(rawFallback) ? rawFallback : rawFallback.data || [];
       }
+
+      setMealTypes(types);
+      setStudents(studentList);
+
+      if (types.length > 0) {
+        setFormData((prev) => ({ ...prev, mealTypeId: prev.mealTypeId || types[0].id }));
+      }
+      if (studentList.length > 0) {
+        setFormData((prev) => ({ ...prev, studentId: prev.studentId || studentList[0].id }));
+      }
+    } catch (err) {
+      console.error('Failed to load metadata:', err);
     }
+  };
+
+  useEffect(() => {
     loadMeta();
   }, []);
 
@@ -121,15 +134,16 @@ export default function MealAttendancePage() {
         getMealStatistics({ date: selectedDate }),
       ]);
 
-      const attData = attRes.data?.data || [];
-      const attPaging = attRes.data?.pagination || { page: 1, limit: 15, total: 0, totalPages: 1 };
+      const attData = Array.isArray(attRes?.data) ? attRes.data : attRes?.data?.data || attRes || [];
+      const attPaging = attRes?.pagination || attRes?.data?.pagination || { page: 1, limit: 15, total: 0, totalPages: 1 };
       setAttendanceLogs(attData);
       setPagination(attPaging);
 
-      setStats(statsRes.data?.data || statsRes.data);
+      const statsData = statsRes?.data || statsRes;
+      setStats(statsData?.data || statsData);
     } catch (err) {
       console.error('Failed to load meal attendance:', err);
-      setError(err.response?.data?.message || 'Failed to fetch meal attendance from database');
+      setError(err.response?.data?.message || err.message || 'Failed to fetch meal attendance from database');
     } finally {
       setLoading(false);
     }
@@ -284,18 +298,23 @@ export default function MealAttendancePage() {
               <button
                 onClick={() => {
                   setFormError(null);
+                  if (students.length === 0) {
+                    loadMeta();
+                  }
                   setFormData((prev) => ({
                     ...prev,
                     mealDate: selectedDate,
                     status: 'PRESENT',
                     remarks: '',
+                    studentId: prev.studentId || (students[0]?.id || ''),
+                    mealTypeId: prev.mealTypeId || (mealTypes[0]?.id || ''),
                   }));
                   setModalOpen(true);
                 }}
                 className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold shadow-lg shadow-emerald-900/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
               >
                 <Plus className="w-4 h-4" />
-                Mark Attendance
+                Record Attendance
               </button>
             )}
           </div>
@@ -624,9 +643,9 @@ export default function MealAttendancePage() {
                   <CheckCircle2 className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-slate-800">Record Student Meal Attendance</h3>
+                  <h3 className="text-lg font-bold text-slate-800">Record Resident Meal Attendance</h3>
                   <p className="text-xs text-slate-400">
-                    Saved to MySQL <code className="text-emerald-700 font-semibold">meal_attendance</code> table
+                    Hostel & PG Dining Check-in &bull; Real-time Attendance
                   </p>
                 </div>
               </div>
@@ -646,21 +665,28 @@ export default function MealAttendancePage() {
             )}
 
             <form onSubmit={handleMarkSubmit} className="mt-4 space-y-4">
-              {/* Select Student */}
+              {/* Select Student / Resident */}
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Select Student Resident <span className="text-rose-500">*</span>
+                  Select Resident / Tenant <span className="text-rose-500">*</span>
                 </label>
                 <select
+                  required
                   value={formData.studentId}
                   onChange={(e) => setFormData({ ...formData, studentId: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-800 focus:outline-none focus:border-emerald-500 font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-800 focus:outline-hidden focus:border-emerald-500 font-medium"
                 >
-                  {students.map((s) => (
-                    <option key={s.id} value={s.id}>
-                      {s.first_name} {s.last_name} ({s.roll_number}) — {s.department}
-                    </option>
-                  ))}
+                  <option value="">-- Choose Resident / Guest --</option>
+                  {students.map((s) => {
+                    const displayName = s.name || s.full_name || `${s.first_name || ''} ${s.last_name || ''}`.trim() || 'Resident';
+                    const rollTag = s.roll_number || s.rollNumber || `ID: ${s.id}`;
+                    const roomTag = s.room_number ? ` • Room ${s.room_number}` : '';
+                    return (
+                      <option key={s.id} value={s.id}>
+                        {displayName} ({rollTag}){roomTag}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
 
@@ -671,10 +697,12 @@ export default function MealAttendancePage() {
                     Meal Type <span className="text-rose-500">*</span>
                   </label>
                   <select
+                    required
                     value={formData.mealTypeId}
                     onChange={(e) => setFormData({ ...formData, mealTypeId: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-800 focus:outline-none focus:border-emerald-500 font-medium"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm text-slate-800 focus:outline-hidden focus:border-emerald-500 font-medium"
                   >
+                    <option value="">-- Choose Meal --</option>
                     {mealTypes.map((mt) => (
                       <option key={mt.id} value={mt.id}>
                         {mt.name}

@@ -170,6 +170,31 @@ async function deleteNotification(req, res, next) {
   }
 }
 
+/**
+ * POST /api/notifications/send-direct - Send direct notification to a specific student or user (ADMIN, WARDEN)
+ */
+async function sendDirectNotification(req, res, next) {
+  try {
+    const { studentId, userId, title, message, type, link } = req.body;
+    const notification = await notificationService.sendDirectNotification({
+      studentId: studentId ? parseInt(studentId, 10) : undefined,
+      userId: userId ? parseInt(userId, 10) : undefined,
+      title,
+      message,
+      type: type || 'SYSTEM',
+      link: link || null,
+    });
+
+    res.status(201).json({
+      success: true,
+      message: 'Direct push notification delivered successfully',
+      data: notification,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   getNotifications,
   getUnreadNotifications,
@@ -181,4 +206,5 @@ module.exports = {
   getPreferences,
   updatePreferences,
   broadcastAnnouncement,
+  sendDirectNotification,
 };

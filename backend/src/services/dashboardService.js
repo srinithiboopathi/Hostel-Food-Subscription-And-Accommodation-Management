@@ -1035,7 +1035,6 @@ async function getStudentDashboard(studentUserId) {
   }
 
   let roomInfo = null;
-  let roommates = [];
   if (student.current_room_id) {
     const [roomRows] = await query(
       `SELECT id, room_number, floor, room_type, capacity, occupied_count, base_rent, status 
@@ -1044,15 +1043,6 @@ async function getStudentDashboard(studentUserId) {
     );
     roomInfo = roomRows[0] || null;
 
-    // Roommates (same room, different student)
-    const [roommateRows] = await query(
-      `SELECT s.id, u.full_name, s.roll_number, s.department, s.year_of_study, u.phone, u.avatar_url
-       FROM students s
-       JOIN users u ON s.user_id = u.id
-       WHERE s.current_room_id = ? AND s.id != ? AND s.status = 'ACTIVE'`,
-      [student.current_room_id, studentId]
-    );
-    roommates = roommateRows;
   }
 
   // Active Room Allocation
@@ -1231,7 +1221,6 @@ async function getStudentDashboard(studentUserId) {
       hostel: hostelInfo,
       room: roomInfo,
       allocation: currentAllocation,
-      roommates,
     },
     fees: {
       totalDue: Number(studentFeeStats[0]?.totalPayable) || 0,

@@ -9,11 +9,18 @@ dotenv.config();
 
 const app = express();
 const PORT = parseInt(process.env.PORT, 10) || 5000;
+const isProduction = process.env.NODE_ENV === 'production';
+if (isProduction && !process.env.CLIENT_URL) {
+  throw new Error('CLIENT_URL must be configured when NODE_ENV is production');
+}
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
+const allowedOrigins = isProduction
+  ? [CLIENT_URL]
+  : [CLIENT_URL, 'http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:3000'];
 
 // 1. Security & CORS configuration
 app.use(cors({
-  origin: [CLIENT_URL, 'http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:3000'],
+  origin: allowedOrigins,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],

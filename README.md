@@ -211,3 +211,18 @@ Environment checklist:
 - `PORT=5000`
 - Secure random `JWT_SECRET`
 - Restricted `CLIENT_URL` CORS origin
+
+### Student Portal
+- The public landing page is `/`; students sign in at `/student-login` with their own roll number or registered email and password.
+- Student credentials are checked against the existing user records. The student sign-in endpoint rejects staff accounts, and student dashboard data is resolved from the authenticated account.
+- Do not publish a production URL until the frontend, API, and MySQL database are deployed with production credentials and HTTPS enabled.
+- Staff sign in separately at `/login`; the server only accepts active `ADMIN`, `WARDEN`, `MESS_MANAGER`, and `ACCOUNTANT` accounts there. The staff screen and dashboard no longer show shared demo credentials or role-switch accounts.
+- Change each staff member's existing shared/demo password before relying on staff sign-in. From the `backend` folder, run `npm run account:password`; enter that account's email and type a unique password of at least 12 characters. Password entry is hidden and the script stores only a bcrypt hash. Repeat once per account.
+
+### Deploying to Render
+1. Push the repository to GitHub and create a Render Blueprint from `render.yaml`.
+2. Set the API service's `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, and `DB_NAME` to the hosted MySQL connection values. Allowlist Render's outbound IPs with the database provider if required.
+3. After Render assigns service URLs, set the API's `CLIENT_URL` to the frontend service origin and the frontend's `VITE_API_URL` to `https://<api-service>.onrender.com/api`. Save/redeploy both services so the CORS and build-time API settings take effect.
+4. Open the frontend service URL. Use an always-on API service plan if the portal must respond without cold starts.
+
+Keep database credentials in Render environment settings, not in this repository. Ensure the hosted database already contains the application's schema and existing records before deploying.

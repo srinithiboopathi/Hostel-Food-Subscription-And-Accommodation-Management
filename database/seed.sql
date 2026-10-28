@@ -6,8 +6,6 @@
 -- $2b$10$EpRnTzVlqHNP0.fUbXUwSOyuiXe/QLSUG6xNekd59SQR4eR5sv9ey
 -- =============================================================================
 
-USE hostel_db;
-
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- 1. USERS
